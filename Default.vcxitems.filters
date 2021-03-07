@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Streams\StreamReader.cpp">
+      <Filter>Storage\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Streams\StreamWriter.cpp">
+      <Filter>Storage\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)User\Storage\Buffer.cpp">
+      <Filter>User\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Compression.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MemoryHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ErrorHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\BufferHelper.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Collections\StringList.cpp">
+      <Filter>Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CharHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StringClass.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Unknown.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Core\Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Core\Timer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Intermediate.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\FileSize.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MemoryHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Platform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VariableArguments.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\InputStream.h">
+      <Filter>Storage\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\OutputStream.h">
+      <Filter>Storage\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\RandomAccessStream.h">
+      <Filter>Storage\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\StreamReader.h">
+      <Filter>Storage\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\StreamWriter.h">
+      <Filter>Storage\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Data\Average.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Pointer.h">
+      <Filter>User</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\List.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\ListHelper.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\ListItem.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\ListIterator.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\Vector.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Storage\Buffer.h">
+      <Filter>User\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Compression.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ErrorHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\BufferHelper.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Aligned.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\ArrayHelper.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Cluster.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\ClusterIterator.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Index.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\IndexIterator.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\List.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\ListHelper.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\ListItem.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\ListIterator.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Map.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\MapIterator.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringList.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Vector.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventProc.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Function.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandleHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Procedure.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScopedLock.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CharHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StringClass.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StringHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Unknown.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\SmallList.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)User\Collections\SmallListIterator.h">
+      <Filter>User\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core\Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core\Timer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\VectorIterator.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Array.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\ArrayIterator.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)VariableHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringListItem.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Intermediate.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Container.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\FileSize.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Clusters\list.hpp">
+      <Filter>Clusters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Clusters\slist.hpp">
+      <Filter>Clusters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Reference.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Storage">
+      <UniqueIdentifier>{9cd8f427-5ba4-41aa-8278-690eb80cadb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Storage\Streams">
+      <UniqueIdentifier>{04fa47e3-05a9-485a-9ab5-e3b4e7de6d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{0df95e1a-154d-4ad8-84db-fa8fb4056403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clusters">
+      <UniqueIdentifier>{acc701e7-cf3c-4c31-87f3-bbe272a2ba9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User">
+      <UniqueIdentifier>{05942109-aa42-4a4d-84d5-c6b83e5c965c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\Collections">
+      <UniqueIdentifier>{8a2e2529-6919-4a3a-8f2f-40fb5923e655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User\Storage">
+      <UniqueIdentifier>{855bb3b1-c049-4724-ae85-90dda410f097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration">
+      <UniqueIdentifier>{638d0077-2795-4e49-bec1-f8c94c7c3257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collections">
+      <UniqueIdentifier>{ceeba065-b6f4-4943-a711-4e3cd9babd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b182506a-1f10-4ad3-a01d-305dd6e65f72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Configuration\Default.props">
+      <Filter>Configuration</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Configuration\Compiler.props">
+      <Filter>Configuration</Filter>
+    </None>
+  </ItemGroup>
+</Project>

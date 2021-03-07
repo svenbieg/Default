@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Version -->
+    <Timestamp>$([System.DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss"))</Timestamp>
+    <!-- Directories -->
+    <HomePath>$(HOMEDRIVE)$(HOMEPATH)\</HomePath>
+    <!-- Visual Studio -->
+    <IntDir>$(SolutionDir)$(TargetConfig)\$(TargetPlatform)\$(Platform)\Temp\</IntDir>
+    <OutDir>$(SolutionDir)$(TargetConfig)\$(TargetPlatform)\$(Platform)\</OutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Preprocessor -->
+    <PreprocessorList Condition="'$(TargetConfig)'=='Debug'" Include="_DEBUG" />
+    <PreprocessorList Condition="'$(TargetConfig)'=='Release'" Include="NDEBUG" />
+  </ItemGroup>
+</Project>
