@@ -33,10 +33,10 @@ class Vector: public virtual Object
 {
 private:
 	// Using
-	using InputStream=Storage::Streams::InputStream;
-	using OutputStream=Storage::Streams::OutputStream;
-	using StreamReader=Storage::Streams::StreamReader;
-	using StreamWriter=Storage::Streams::StreamWriter;
+	using InputStream=::Storage::Streams::InputStream;
+	using OutputStream=::Storage::Streams::OutputStream;
+	using StreamReader=::Storage::Streams::StreamReader;
+	using StreamWriter=::Storage::Streams::StreamWriter;
 
 public:
 	// Iterator
