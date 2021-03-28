@@ -51,7 +51,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Procedure.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Reference.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScopedLock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Aligned.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\BufferHelper.h" />

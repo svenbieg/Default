@@ -10,6 +10,7 @@
 //=======
 
 #include "Clusters/slist.hpp"
+#include "ScopedLock.h"
 
 
 //===========

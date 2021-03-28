@@ -43,6 +43,7 @@ public:
 		}
 	VariableHandle& operator=(VariableHandle const& Handle) { return operator=(Handle.pObject); }
 	Event<_owner_t, Handle<_obj_t>> Changed;
+	VOID SetInternal(Handle<_obj_t> Object) { HandleAssign(&pObject, Object); }
 
 private:
 	// Common

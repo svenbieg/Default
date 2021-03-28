@@ -58,7 +58,7 @@ template <class _flags_t, class _flag_t> inline VOID SetFlag(_flags_t& Flags, _f
 
 INT CompareMemory(const VOID* Buffer1, const VOID* Buffer2, SIZE_T Size);
 VOID CopyMemory(VOID* Destination, const VOID* Source, SIZE_T Size);
-VOID FillMemory(VOID* Destination, SIZE_T Size, SIZE_T Value);
+VOID FillMemory(VOID* Destination, SIZE_T Size, UINT Value);
 VOID MoveMemory(VOID* Destination, const VOID* Source, SIZE_T Size);
 VOID SetMemory(VOID* Destination, INT Value, SIZE_T Size);
 VOID ZeroMemory(VOID* Destination, SIZE_T Size);

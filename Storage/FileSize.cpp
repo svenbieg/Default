@@ -52,10 +52,17 @@ if(usize>1024)
 return new String("%u Bytes", (UINT)usize);
 }
 
+SIZE_T FileSize::ToSIZE_T()const
+{
+if(uSize>MAX_SIZE_T)
+	return MAX_SIZE_T;
+return (SIZE_T)uSize;
+}
+
 UINT FileSize::ToUINT()const
 {
-if(uSize>0xFFFFFFFF)
-	return 0xFFFFFFFF;
+if(uSize>MAX_UINT)
+	return MAX_UINT;
 return (UINT)uSize;
 }
 

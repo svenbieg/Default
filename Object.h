@@ -17,7 +17,7 @@ public:
 
 	// Common
 	VOID AddReference() { uRefCount++; }
-	SIZE_T GetRefCount()const { return uRefCount; }
+	SIZE_T GetRefCount() { return uRefCount; }
 	VOID Release()
 		{
 		if(--uRefCount==0)
@@ -32,5 +32,5 @@ protected:
 
 private:
 	// Common
-	SIZE_T uRefCount;
+	volatile SIZE_T uRefCount;
 };

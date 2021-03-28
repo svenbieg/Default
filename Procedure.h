@@ -43,7 +43,7 @@ public:
 		}
 
 	// Common
-	VOID Run()
+	VOID operator()()const
 		{
 		if(hCallable)
 			hCallable->Run();

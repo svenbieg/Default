@@ -283,8 +283,8 @@ public:
 	// Access
 	operator String*()const { return pObject; }
 	operator Handle<String>()const { return pObject; }
-	String* operator->()const { return pObject; }
-	String* Get()const { return pObject; }
+	Handle<String> operator->()const { return pObject; }
+	Handle<String> Get()const { return pObject; }
 
 	// Comparison
 	BOOL operator==(decltype(nullptr))const { return !(pObject&&pObject->GetLength()); }
@@ -453,6 +453,7 @@ public:
 		return new String("%s%s", pObject->Begin(), Append->Begin());
 		}
 	Event<_owner_t, Handle<String>> Changed;
+	VOID SetInternal(Handle<String> Handle) { HandleAssign(&pObject, Handle.pObject); }
 
 private:
 	// Common

@@ -184,7 +184,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Clusters\slist.hpp">
       <Filter>Clusters</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Reference.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Storage">

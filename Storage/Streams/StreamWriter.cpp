@@ -185,9 +185,10 @@ if(!hStream)
 SIZE_T usize=0;
 for(SIZE_T u=0; u<ucount; u++)
 	{
-	if(!hStream->Write(&ubyte, sizeof(BYTE)))
+	SIZE_T written=hStream->Write(&ubyte, sizeof(BYTE));
+	if(!written)
 		break;
-	usize++;
+	usize+=written;
 	}
 return usize;
 }

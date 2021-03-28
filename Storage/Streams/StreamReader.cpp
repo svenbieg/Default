@@ -191,8 +191,8 @@ if(!uavailable)
 	pstr[0]=0;
 	return 0;
 	}
-SIZE_T umax=MIN(usize, uavailable);
-SIZE_T upos=0;
+UINT umax=(UINT)MIN(uavailable, usize);
+UINT upos=0;
 while(upos<umax)
 	{
 	TCHAR c=ReadChar();

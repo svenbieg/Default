@@ -37,12 +37,12 @@ public:
 	SIZE_T GoTo(TCHAR Char);
 	SIZE_T Read(VOID* Buffer, SIZE_T Size);
 	BYTE ReadByte();
-	SIZE_T ReadByte(BYTE* Value) { return Read(&Value, sizeof(BYTE)); }
+	SIZE_T ReadByte(BYTE* Value) { return Read(Value, sizeof(BYTE)); }
 	TCHAR ReadChar();
 	FLOAT ReadFloat();
-	SIZE_T ReadFloat(FLOAT* Value) { return Read(&Value, sizeof(FLOAT)); }
+	SIZE_T ReadFloat(FLOAT* Value) { return Read(Value, sizeof(FLOAT)); }
 	INT ReadInt();
-	SIZE_T ReadInt(INT* Value) { return Read(&Value, sizeof(INT)); }
+	SIZE_T ReadInt(INT* Value) { return Read(Value, sizeof(INT)); }
 	Handle<String> ReadString(TCHAR Stop=0, SIZE_T* Size=nullptr);
 	UINT ReadString(LPTSTR Buffer, UINT Size, TCHAR Stop=0);
 	UINT ReadUInt();

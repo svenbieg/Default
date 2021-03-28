@@ -26,7 +26,7 @@ VOID CopyMemory(VOID* pdst, const VOID* psrc, SIZE_T usize)
 memcpy(pdst, psrc, usize);
 }
 
-VOID FillMemory(VOID* pdst, SIZE_T size, SIZE_T value)
+VOID FillMemory(VOID* pdst, SIZE_T size, UINT value)
 {
 memset(pdst, value, size);
 }

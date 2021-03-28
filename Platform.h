@@ -20,6 +20,6 @@
 #include "Event.h"
 #include "Handle.h"
 #include "Object.h"
+#include "Procedure.h"
 #include "Property.h"
-#include "Reference.h"
 #include "VariableHandle.h"

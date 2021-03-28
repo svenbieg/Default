@@ -27,6 +27,7 @@ public:
 	operator UINT64()const { return uSize; }
 	Handle<String> ToString()const;
 	static Handle<String> ToString(UINT64 Size);
+	SIZE_T ToSIZE_T()const;
 	UINT ToUINT()const;
 
 private:

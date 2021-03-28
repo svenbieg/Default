@@ -1298,8 +1298,17 @@ for(UINT uformat=0; pformat[uformat]; )
 		case StringFormat::String:
 			{
 			LPCSTR p=nullptr;
-			args.Get(p);
-			ustr+=_StringPrintString(&pstr[ustr], ucopy, p, flags, uwidth==(UINT)-1? 0: uwidth);
+			args.TryGet(p);
+			if(p)
+				{
+				args.MoveNext();
+				ustr+=_StringPrintString(&pstr[ustr], ucopy, p, flags, uwidth==(UINT)-1? 0: uwidth);
+				continue;
+				}
+			LPCWSTR pw=nullptr;
+			args.Get(pw);
+			if(pw)
+				ustr+=_StringPrintString(&pstr[ustr], ucopy, pw, flags, uwidth==(UINT)-1? 0: uwidth);
 			continue;
 			}
 		case StringFormat::UInt:
