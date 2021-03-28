@@ -18,6 +18,7 @@
 //=========
 
 #include "Event.h"
+#include "Function.h"
 #include "Handle.h"
 #include "Object.h"
 #include "Procedure.h"
