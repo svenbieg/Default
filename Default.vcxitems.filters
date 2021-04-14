@@ -37,6 +37,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\FileSize.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Core\Dispatcher.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MemoryHelper.h" />
@@ -132,12 +135,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventHandler.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)EventProc.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Function.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HandleHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Procedure.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScopedLock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CharHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
@@ -183,6 +183,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Clusters\slist.hpp">
       <Filter>Clusters</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core\DispatchedHandler.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core\Dispatcher.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

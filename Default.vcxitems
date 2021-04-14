@@ -39,17 +39,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Vector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\VectorIterator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Core\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core\DispatchedHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Core\Dispatcher.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Core\Timer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Data\Average.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ErrorHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventHandler.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)EventProc.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Function.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HandleHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Procedure.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScopedLock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Aligned.h" />
@@ -83,10 +82,15 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CharHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Collections\StringList.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Core\Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Core\Application.cpp">
+      <ObjectFileName>$(IntDir)Core.Application.o</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Core\Dispatcher.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Core\Timer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ErrorHelper.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MemoryHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MemoryHelper.cpp">
+      <ObjectFileName>$(IntDir)Default.MemoryHelper.o</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\BufferHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Compression.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\FileSize.cpp" />
@@ -96,7 +100,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)StringClass.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Unknown.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)User\Storage\Buffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)User\Storage\Buffer.cpp">
+      <ObjectFileName>$(IntDir)User.Storage.Buffer.o</ObjectFileName>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Configuration\Compiler.props" />

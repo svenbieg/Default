@@ -10,7 +10,7 @@
 //=======
 
 #include "User/Collections/SmallList.h"
-#include "EventProc.h"
+#include "EventHandler.h"
 #include "Handle.h"
 
 
@@ -107,16 +107,6 @@ public:
 		auto phandler=new Details::EventHandlerWithSender<_sender_t, _receiver_t, _args_t...>(Receiver, Proc);
 		this->cHandlers.Append(phandler);
 		}
-	template <class _receiver_t> VOID AddProc(_receiver_t* Receiver, VOID (_receiver_t::*Proc)(_args_t...))
-		{
-		auto pproc=new Details::EventProcWithArgs<_sender_t, _receiver_t, _args_t...>(Receiver, Proc);
-		this->cHandlers.Append(pproc);
-		}
-	template <class _receiver_t> VOID AddProc(_receiver_t* Receiver, VOID (_receiver_t::*Proc)(Handle<_sender_t>, _args_t...))
-		{
-		auto pproc=new Details::EventProcWithSender<_sender_t, _receiver_t, _args_t...>(Receiver, Proc);
-		this->cHandlers.Append(pproc);
-		}
 };
 
 
@@ -140,10 +130,5 @@ public:
 		{
 		auto phandler=new Details::EventHandlerWithArgs<VOID, _receiver_t, _args_t...>(Receiver, Proc);
 		this->cHandlers.Append(phandler);
-		}
-	template <class _receiver_t> VOID AddProc(_receiver_t* Receiver, VOID (_receiver_t::*Proc)(_args_t...))
-		{
-		auto pproc=new Details::EventProcWithArgs<VOID, _receiver_t, _args_t...>(Receiver, Proc);
-		this->cHandlers.Append(pproc);
 		}
 };
