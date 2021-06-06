@@ -29,6 +29,11 @@ iInterval(0),
 uLastTime(0)
 {}
 
+Timer::~Timer()
+{
+Stop();
+}
+
 
 //========
 // Common

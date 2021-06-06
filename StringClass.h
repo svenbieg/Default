@@ -9,9 +9,10 @@
 // Using
 //=======
 
+#include "Collections/StringList.h"
 #include "Storage/Streams/InputStream.h"
 #include "Storage/Streams/OutputStream.h"
-#include "HandleHelper.h"
+#include "Handle.h"
 #include "StringHelper.h"
 #include "VariableHandle.h"
 
@@ -34,6 +35,7 @@ private:
 	// Using
 	using InputStream=Storage::Streams::InputStream;
 	using OutputStream=Storage::Streams::OutputStream;
+	using StringList=Collections::StringList;
 
 public:
 	// Con-/Destructors
@@ -56,6 +58,7 @@ public:
 	BOOL IsEmpty()const { return !(pBuffer&&pBuffer[0]); }
 	Handle<String> LowerCase()const;
 	template <class _fmt_t, class... _args_t> UINT Scan(_fmt_t const* Format, _args_t... Arguments) { return StringScan(pBuffer, Format, Arguments...); }
+	Handle<StringList> Split(CHAR Char=';');
 	Handle<String> UpperCase()const;
 	SIZE_T WriteToStream(Handle<OutputStream> Stream);
 

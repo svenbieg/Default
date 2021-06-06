@@ -35,7 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Map.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\MapIterator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringList.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringListItem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringListIterator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Vector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\VectorIterator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Core\Application.h" />
@@ -49,7 +49,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HandleHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PropertyClass.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScopedLock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Aligned.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\BufferHelper.h" />
@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CharHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Collections\StringList.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Collections\StringListIterator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Core\Application.cpp">
       <ObjectFileName>$(IntDir)Core.Application.o</ObjectFileName>
     </ClCompile>

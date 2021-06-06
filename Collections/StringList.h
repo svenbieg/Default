@@ -9,8 +9,15 @@
 // Using
 //=======
 
-#include "List.h"
-#include "StringListItem.h"
+#include "StringListIterator.h"
+
+
+//======================
+// Forward-Declarations
+//======================
+
+class String;
+template <> class Handle<String>;
 
 
 //===========
@@ -24,9 +31,12 @@ namespace Collections {
 // String-List
 //=============
 
-class StringList: public List<StringListItem>
+class StringList: public Object
 {
 public:
+	// Friends
+	friend StringListIterator;
+
 	// Con-/Destructors
 	StringList();
 	template <class... _params_t> StringList(_params_t... Params): StringList()
@@ -37,11 +47,22 @@ public:
 		}
 
 	// Access
-	BOOL Contains(Handle<String> String);
+	BOOL Contains(Handle<String> String, BOOL CaseSensitive=true);
+	Handle<StringListIterator> First();
+	Handle<StringListIterator> Last();
 
 	// Modification
+	Event<StringList, Handle<String>> Added;
 	VOID Append(Handle<String> String);
-	VOID Remove(Handle<String> String);
+	VOID InsertAt(SIZE_T Position, Handle<String> String);
+	VOID Remove(Handle<String> String, BOOL CaseSensitive=true);
+	VOID RemoveAt(SIZE_T Position);
+	Event<StringList, Handle<String>> Removed;
+
+private:
+	// Common
+	CriticalSection cCriticalSection;
+	Clusters::list<Handle<String>> cList;
 };
 
 }

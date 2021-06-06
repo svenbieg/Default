@@ -21,6 +21,7 @@ class Timer: public Object
 public:
 	// Con-/Destructors
 	Timer();
+	~Timer();
 
 	// Common
 	BOOL IsStarted()const { return iInterval!=0; }

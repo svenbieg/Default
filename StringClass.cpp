@@ -14,6 +14,8 @@
 #include "CharHelper.h"
 #include "StringClass.h"
 
+using namespace Collections;
+
 
 //========
 // Access
@@ -58,6 +60,31 @@ Handle<String> String::LowerCase()const
 Handle<String> hstr=new String(pBuffer);
 StringLowerCase((LPTSTR)hstr->Begin(), 0, 0);
 return hstr;
+}
+
+Handle<StringList> String::Split(CHAR c)
+{
+Handle<StringList> list=new StringList();
+if(!pBuffer)
+	return list;
+UINT pos=0;
+while(pBuffer[pos])
+	{
+	UINT len=0;
+	while(pBuffer[pos+len])
+		{
+		if(CharCompare(pBuffer[pos+len], c)==0)
+			break;
+		len++;
+		}
+	if(len)
+		{
+		Handle<String> str=new String(len, &pBuffer[pos]);
+		list->Append(str);
+		}
+	pos+=len+1;
+	}
+return list;
 }
 
 Handle<String> String::UpperCase()const

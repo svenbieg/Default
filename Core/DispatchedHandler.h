@@ -10,6 +10,7 @@
 //=======
 
 #include <functional>
+#include "Handle.h"
 #include "TypeHelper.h"
 
 

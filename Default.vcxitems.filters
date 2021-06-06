@@ -40,6 +40,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Core\Dispatcher.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Collections\StringListIterator.cpp">
+      <Filter>Collections</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MemoryHelper.h" />
@@ -140,7 +143,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Object.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScopedLock.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CharHelper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PropertyClass.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringClass.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Unknown.h" />
@@ -166,9 +169,6 @@
       <Filter>Collections</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)VariableHandle.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringListItem.h">
-      <Filter>Collections</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Intermediate.h">
       <Filter>Storage</Filter>
     </ClInclude>
@@ -189,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Core\Dispatcher.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringListIterator.h">
+      <Filter>Collections</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

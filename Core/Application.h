@@ -10,6 +10,8 @@
 //=======
 
 #include "Dispatcher.h"
+#include "Event.h"
+#include "StringClass.h"
 
 
 //===========

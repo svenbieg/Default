@@ -64,9 +64,8 @@ public:
 		if(!this->pReceiver)
 			return;
 		this->uRunning++;
-		auto preceiver=(_receiver_t*)this->pReceiver;
-		Handle<_receiver_t> hreceiver=preceiver;
-		(preceiver->*pProcedure)(Arguments...);
+		Handle<_receiver_t> receiver=(_receiver_t*)this->pReceiver;
+		(receiver->*pProcedure)(Arguments...);
 		this->uRunning--;
 		}
 
@@ -96,9 +95,9 @@ public:
 		if(!this->pReceiver)
 			return;
 		this->uRunning++;
-		auto preceiver=(_receiver_t*)this->pReceiver;
-		Handle<_receiver_t> hreceiver=preceiver;
-		(preceiver->*pProcedure)(Sender, Arguments...);
+		Handle<_receiver_t> receiver=(_receiver_t*)this->pReceiver;
+		Handle<_sender_t> sender=Sender;
+		(receiver->*pProcedure)(Sender, Arguments...);
 		this->uRunning--;
 		}
 
