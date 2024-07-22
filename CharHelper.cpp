@@ -86,6 +86,7 @@ else if(c>='A')
 	{
 	c-='A';
 	}
+c-='0';
 UINT digit=(UINT)c;
 if(digit<base)
 	{
