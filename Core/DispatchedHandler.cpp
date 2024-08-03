@@ -38,7 +38,7 @@ while(current->hNext)
 	current=current->hNext;
 	count++;
 	}
-Assert(count<10);
+assert(count<10);
 #else
 while(current->hNext)
 	{
