@@ -28,14 +28,13 @@ public:
 	Handle(_obj_t* Object) { HandleCreate(&pObject, Object); }
 	template <class _convert_t> Handle(_convert_t* Object) { HandleCreate(&pObject, static_cast<_obj_t*>(Object)); }
 	Handle(Handle<_obj_t> const& Handle) { HandleCreate(&pObject, Handle.pObject); }
-	Handle(Handle<_obj_t>&& Handle): pObject(Handle.pObject) { Handle.pObject=nullptr; }
+	Handle(Handle<_obj_t>&& Handle)noexcept: pObject(Handle.pObject) { Handle.pObject=nullptr; }
 	template <class _convert_t> Handle(Handle<_convert_t> const& Handle) { HandleCreate(&pObject, static_cast<_obj_t*>(Handle.pObject)); }
 	~Handle() { HandleClear(&pObject); }
 
 	// Access
 	inline operator _obj_t*()const { return pObject; }
 	inline _obj_t* operator->()const { return pObject; }
-	template<class _convert_t> inline Handle<_convert_t> As()const { return dynamic_cast<_convert_t*>(pObject); }
 
 	// Comparison
 	inline BOOL operator==(_obj_t* Object)const { return pObject==Object; }

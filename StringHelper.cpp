@@ -202,37 +202,6 @@ UINT StringLength(LPCWSTR str, UINT max)
 return StringLength<WCHAR>(str, max);
 }
 
-template <class _char_t> inline _char_t const* StringTruncate(_char_t const* str, LPCSTR chars)
-{
-UINT char_count=StringLength(chars);
-while(*str)
-	{
-	bool trunc=false;
-	for(UINT u=0; u<char_count; u++)
-		{
-		if(CharCompare(*str, chars[u])==0)
-			{
-			trunc=true;
-			break;
-			}
-		}
-	if(!trunc)
-		break;
-	str++;
-	}
-return str;
-}
-
-LPCSTR StringTruncate(LPCSTR str, LPCSTR chars)
-{
-return StringTruncate<CHAR>(str, chars);
-}
-
-LPCWSTR StringTruncate(LPCWSTR str, LPCSTR chars)
-{
-return StringTruncate<WCHAR>(str, chars);
-}
-
 
 //==============
 // Modification
@@ -1099,16 +1068,6 @@ return StringPrintFloat<CHAR, FLOAT>(str, size, value, flags, width, prec);
 //============
 // Formatting
 //============
-
-UINT StringPrint(LPSTR buf, UINT size, LPCSTR str)
-{
-return StringCopy(buf, size, str);
-}
-
-UINT StringPrint(LPWSTR buf, UINT size, LPCSTR str)
-{
-return StringCopy(buf, size, str);
-}
 
 template <class _char_t> inline UINT StringPrintArgs(_char_t* str, UINT size, LPCSTR format, VariableArguments const& args)
 {

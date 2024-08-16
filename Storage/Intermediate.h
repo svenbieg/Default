@@ -45,8 +45,8 @@ private:
 	VOID DiscardBuffers();
 	UINT GetBuffer(SIZE_T Offset, BYTE** Buffer, UINT* Position);
 	Clusters::list<BYTE*> cBuffers;
-	Concurrency::Mutex cMutex;
-	Concurrency::Signal cWritten;
+	Mutex cMutex;
+	Signal cWritten;
 	SIZE_T uReadPos;
 	SIZE_T uWritePos;
 };

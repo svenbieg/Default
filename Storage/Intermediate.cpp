@@ -11,8 +11,6 @@
 
 #include "Intermediate.h"
 
-using namespace Concurrency;
-
 
 //===========
 // Namespace

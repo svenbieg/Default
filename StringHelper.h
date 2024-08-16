@@ -36,8 +36,6 @@ UINT StringLength(LPCSTR String);
 UINT StringLength(LPCWSTR String);
 UINT StringLength(LPCSTR String, UINT Max);
 UINT StringLength(LPCWSTR String, UINT Max);
-LPCSTR StringTruncate(LPCSTR String, LPCSTR Chars);
-LPCWSTR StringTruncate(LPCWSTR String, LPCSTR Chars);
 
 
 //==============
@@ -82,8 +80,6 @@ Zero=64
 };
 
 UINT StringGetFormat(LPCSTR String, StringFormat& Format, StringFormatFlags& Flags, UINT& Width, UINT& Precision);
-UINT StringPrint(LPSTR Buffer, UINT Size, LPCSTR String);
-UINT StringPrint(LPWSTR Buffer, UINT Size, LPCSTR String);
 UINT StringPrintArgs(LPSTR Buffer, UINT Size, LPCSTR Format, VariableArguments const& Arguments);
 UINT StringPrintArgs(LPWSTR Buffer, UINT Size, LPCSTR Format, VariableArguments const& Arguments);
 UINT StringPrintDouble(LPSTR Buffer, UINT Size, DOUBLE Value, StringFormatFlags Flags=StringFormatFlags::None, UINT Width=0, UINT Precision=0);

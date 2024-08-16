@@ -11,8 +11,6 @@
 
 #include "DynamicBuffer.h"
 
-using namespace Concurrency;
-
 
 //===========
 // Namespace
@@ -56,7 +54,7 @@ return read;
 
 BOOL DynamicBuffer::Seek(FILE_SIZE pos)
 {
-ScopedLock lock(cMutex);
+UniqueLock lock(cMutex);
 if(pos>=cList.get_count())
 	return false;
 uPosition=(SIZE_T)pos;
@@ -70,13 +68,13 @@ return true;
 
 VOID DynamicBuffer::Flush()
 {
-ScopedLock lock(cMutex);
+UniqueLock lock(cMutex);
 uPosition=0;
 }
 
 SIZE_T DynamicBuffer::Write(VOID const* buf, SIZE_T size)
 {
-ScopedLock lock(cMutex);
+UniqueLock lock(cMutex);
 cList.set_many(uPosition, (BYTE const*)buf, size);
 uPosition+=size;
 return size;

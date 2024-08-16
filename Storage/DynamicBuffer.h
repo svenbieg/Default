@@ -43,7 +43,7 @@ public:
 private:
 	// Common
 	Clusters::list<BYTE, SIZE_T, 64> cList;
-	Concurrency::Mutex cMutex;
+	SharedMutex cMutex;
 	SIZE_T uPosition;
 };
 

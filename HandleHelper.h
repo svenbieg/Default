@@ -40,21 +40,23 @@ if(Source)
 
 template <class _obj_t> VOID HandleAssign(_obj_t** Destination, _obj_t* Source)
 {
-if(Source)
-	Source->AddReference();
 auto dst=*Destination;
 if(dst)
 	dst->Release();
 *Destination=Source;
+if(Source)
+	Source->AddReference();
 }
 
 template <class _obj_t, class _convert_t> VOID HandleAssign(_obj_t** Destination, _convert_t* Source)
 {
-_obj_t* src=static_cast<_obj_t*>(Source);
-if(src)
-	src->AddReference();
 auto dst=*Destination;
+_obj_t* src=static_cast<_obj_t*>(Source);
+if(dst==src)
+	return;
 if(dst)
 	dst->Release();
 *Destination=src;
+if(src)
+	src->AddReference();
 }

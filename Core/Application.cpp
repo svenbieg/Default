@@ -11,8 +11,6 @@
 
 #include "Application.h"
 
-using namespace Concurrency;
-
 
 //===========
 // Namespace
@@ -29,27 +27,16 @@ Handle<Application> Application::Current;
 
 VOID Application::HandleDispatched()
 {
-while(m_DispatchedHandlers)
+while(hDispatched)
 	{
-	DispatchedHandler::Remove(m_DispatchedHandlers)->Run();
+	DispatchedHandler::Remove(hDispatched)->Run();
 	}
-}
-
-INT Application::Run()
-{
-ScopedLock lock(m_Mutex);
-while(Running)
-	{
-	m_Dispatched.Wait(lock);
-	HandleDispatched();
-	}
-return 0;
 }
 
 VOID Application::Quit()
 {
 Running=false;
-m_DispatchedHandlers=nullptr;
+hDispatched=nullptr;
 }
 
 
@@ -66,14 +53,14 @@ Current=this;
 }
 
 
-//==================
-// Common Protected
-//==================
+//================
+// Common Private
+//================
 
-VOID Application::DispatchHandler(DispatchedHandler* handler)
+VOID Application::Dispatch(DispatchedHandler* handler)
 {
-DispatchedHandler::Append(m_DispatchedHandlers, handler);
-m_Dispatched.Broadcast();
+DispatchedHandler::Append(hDispatched, handler);
+OnDispatched();
 }
 
 }

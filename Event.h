@@ -66,7 +66,9 @@ protected:
 			}
 		auto handler=hHandler;
 		while(handler->hNext)
+			{
 			handler=handler->hNext;
+			}
 		handler->hNext=Handler;
 		}
 	VOID Run(_sender_t* Sender, _args_t... Arguments)

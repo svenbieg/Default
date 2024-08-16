@@ -102,7 +102,7 @@ public:
 	Handle(LPCWSTR Value) { HandleCreate<String, String>(&pObject, new String(Value)); }
 	Handle(String* Value) { HandleCreate<String, String>(&pObject, Value); }
 	Handle(Handle<String> const& Handle) { HandleCreate<String, String>(&pObject, Handle.pObject); }
-	Handle(Handle<String>&& Handle): pObject(Handle.pObject) { Handle.pObject=nullptr; }
+	Handle(Handle<String>&& Handle)noexcept: pObject(Handle.pObject) { Handle.pObject=nullptr; }
 	~Handle() { HandleClear(&pObject); }
 
 	// Access
