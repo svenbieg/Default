@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include <utility>
 #include "Function.h"
 
 
@@ -63,94 +64,68 @@ public:
 	typedef VOID (*_proc_t)();
 
 	// Con-/Destructors
-	DispatchedProcedure(_proc_t Procedure): pProcedure(Procedure) {}
+	DispatchedProcedure(_proc_t Procedure): m_Procedure(Procedure) {}
 
 	// Common
-	inline VOID Run()override { (*pProcedure)(); }
+	inline VOID Run()override { (*m_Procedure)(); }
 
 private:
 	// Common
-	_proc_t pProcedure;
+	_proc_t m_Procedure;
 };}
 
 
-//==========================
-// Procedure with Arguments
-//==========================
+//==================
+// Member-Procedure
+//==================
 
 namespace Details {
 
-template <class... _args_t>
-class DispatchedProcedureWithArgs: public DispatchedHandler
-{
-public:
-	// Using
-	typedef VOID (*_proc_t)(_args_t...);
-
-	// Con-/Destructors
-	DispatchedProcedureWithArgs(_proc_t Procedure, _args_t... Arguments):
-		cFunction([Procedure, Arguments...](){ (*Procedure)(Arguments...); })
-		{}
-
-	// Common
-	inline VOID Run()override { cFunction(); }
-
-private:
-	// Common
-	Function<VOID()> cFunction;
-};}
-
-
-//==========
-// Function
-//==========
-
-namespace Details {
-
-template <class _owner_t, class... _args_t>
-class DispatchedFunction: public DispatchedHandler
-{
-public:
-	// Con-/Destructors
-	DispatchedFunction(_owner_t* Owner, Function<VOID(_args_t...)> Function, _args_t... Arguments):
-		cFunction(Function),
-		hOwner(Owner) {}
-
-	// Common
-	inline VOID Run()override { cFunction(); }
-
-private:
-	// Common
-	Function<VOID(_args_t...)> cFunction;
-	Handle<_owner_t> hOwner;
-};}
-
-
-//=================
-// Member-Function
-//=================
-
-namespace Details {
-
-template <class _owner_t, class... _args_t>
-class DispatchedMemberFunction: public DispatchedHandler
+template <class _owner_t>
+class DispatchedMemberProcedure: public DispatchedHandler
 {
 public:
 	// Procedure
-	typedef VOID (_owner_t::*_proc_t)(_args_t...);
+	typedef VOID (_owner_t::*_proc_t)();
 
 	// Con-/Destructors
-	DispatchedMemberFunction(_owner_t* Owner, _proc_t Procedure, _args_t... Arguments):
-		cFunction([Owner, Procedure, Arguments...]() { (Owner->*Procedure)(Arguments...); }),
-		hOwner(Owner) {}
+	DispatchedMemberProcedure(_owner_t* Owner, _proc_t Procedure):
+		m_Owner(Owner),
+		m_Procedure(Procedure)
+		{}
 
 	// Common
-	inline VOID Run()override { cFunction(); }
+	inline VOID Run()override { (m_Owner->*m_Procedure)(); }
 
 private:
 	// Common
-	Function<VOID()> cFunction;
-	Handle<_owner_t> hOwner;
+	_proc_t m_Procedure;
+	Handle<_owner_t> m_Owner;
+};}
+
+
+//========
+// Lambda
+//========
+
+namespace Details {
+
+template <class _owner_t, class _lambda_t>
+class DispatchedLambda: public DispatchedHandler
+{
+public:
+	// Con-/Destructors
+	DispatchedLambda(_owner_t* Owner, _lambda_t&& Lambda):
+		m_Lambda(std::move(Lambda)),
+		m_Owner(Owner) {}
+
+	// Common
+	inline VOID Run()override { m_Lambda(); }
+
+private:
+	// Common
+	_lambda_t m_Lambda;
+	Handle<_owner_t> m_Owner;
 };}
 
 }

@@ -32,6 +32,11 @@ VOID FillMemory(VOID* dst, SIZE_T size, UINT value)
 memset(dst, value, size);
 }
 
+VOID MoveMemory(VOID* dst, VOID const* src, SIZE_T size)
+{
+memmove(dst, src, size);
+}
+
 VOID ZeroMemory(VOID* dst, SIZE_T size)
 {
 memset(dst, 0, size);

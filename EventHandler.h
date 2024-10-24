@@ -69,7 +69,7 @@ public:
 	EventProcedure(_func_t Procedure): pProcedure(Procedure) {}
 
 	// Common
-	inline VOID* GetOwner()const override { return pProcedure; }
+	inline VOID* GetOwner()const override { return (VOID*)pProcedure; }
 	inline VOID Invalidate()override { pProcedure=nullptr; }
 	inline VOID Run(_sender_t* Sender, _args_t... Arguments)override
 		{
