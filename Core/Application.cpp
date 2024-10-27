@@ -31,7 +31,7 @@ VOID Application::DispatchHandler(DispatchedHandler* handler)
 {
 ScopedLock lock(m_Mutex);
 DispatchedHandler::Append(m_DispatchedHandler, handler);
-m_Dispatched.Broadcast();
+m_Dispatched.Trigger();
 }
 
 INT Application::Run()
@@ -56,7 +56,7 @@ VOID Application::Quit()
 ScopedLock lock(m_Mutex);
 Running=false;
 m_DispatchedHandler=nullptr;
-m_Dispatched.Broadcast();
+m_Dispatched.Trigger();
 }
 
 
