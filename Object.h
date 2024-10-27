@@ -31,6 +31,9 @@ public:
 	// Friends
 	template <class _item_t> friend class Handle;
 
+	// Con-/Destructors
+	virtual ~Object() {}
+
 	// Common
 	inline VOID AddReference() { uRefCount++; }
 	inline UINT GetRefCount()const { return uRefCount; }
@@ -41,7 +44,6 @@ public:
 protected:
 	// Con-/Destructors
 	Object(): uRefCount(0) {}
-	virtual ~Object() {}
 
 	// Common
 	UINT uRefCount;

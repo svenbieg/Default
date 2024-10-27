@@ -24,9 +24,9 @@ namespace Storage {
 //==================
 
 StaticBuffer::StaticBuffer(VOID const* buf, SIZE_T size):
-pBuffer((BYTE*)buf),
+m_Buffer((BYTE*)buf),
 uPosition(0),
-uSize(size)
+m_Size(size)
 {}
 
 
@@ -36,21 +36,21 @@ uSize(size)
 
 SIZE_T StaticBuffer::Available()
 {
-if(uSize>uPosition)
-	return uSize-uPosition;
+if(m_Size>uPosition)
+	return m_Size-uPosition;
 return 0;
 }
 
 SIZE_T StaticBuffer::Read(VOID* buf, SIZE_T size)
 {
 SIZE_T available=0;
-if(uSize>uPosition)
-	available=uSize-uPosition;
+if(m_Size>uPosition)
+	available=m_Size-uPosition;
 SIZE_T copy=size;
 if(available)
 	copy=Min(size, available);
 if(buf)
-	CopyMemory(buf, &pBuffer[uPosition], copy);
+	CopyMemory(buf, &m_Buffer[uPosition], copy);
 uPosition+=copy;
 return copy;
 }
@@ -67,12 +67,12 @@ VOID StaticBuffer::Flush()
 SIZE_T StaticBuffer::Write(VOID const* buf, SIZE_T size)
 {
 SIZE_T available=0;
-if(uSize>uPosition)
-	available=uSize-uPosition;
+if(m_Size>uPosition)
+	available=m_Size-uPosition;
 SIZE_T copy=size;
 if(available)
 	copy=Min(size, available);
-CopyMemory(&pBuffer[uPosition], buf, copy);
+CopyMemory(&m_Buffer[uPosition], buf, copy);
 uPosition+=copy;
 return copy;
 }
@@ -84,9 +84,9 @@ return copy;
 
 BOOL StaticBuffer::Seek(FILE_SIZE pos)
 {
-if(uSize>0)
+if(m_Size>0)
 	{
-	if(pos>=uSize)
+	if(pos>=m_Size)
 		return false;
 	}
 uPosition=(SIZE_T)pos;
@@ -101,8 +101,8 @@ return true;
 SIZE_T StaticBuffer::Fill(UINT value, SIZE_T size)
 {
 SIZE_T available=0;
-if(uSize>uPosition)
-	available=uSize-uPosition;
+if(m_Size>uPosition)
+	available=m_Size-uPosition;
 if(size==0)
 	size=available;
 SIZE_T copy=size;
@@ -110,7 +110,7 @@ if(available)
 	copy=Min(size, available);
 if(!copy)
 	return 0;
-FillMemory(&pBuffer[uPosition], copy, value);
+FillMemory(&m_Buffer[uPosition], copy, value);
 uPosition+=copy;
 return copy;
 }
@@ -118,8 +118,8 @@ return copy;
 SIZE_T StaticBuffer::Zero(SIZE_T size)
 {
 SIZE_T available=0;
-if(uSize>uPosition)
-	available=uSize-uPosition;
+if(m_Size>uPosition)
+	available=m_Size-uPosition;
 if(size==0)
 	size=available;
 SIZE_T copy=size;
@@ -127,7 +127,7 @@ if(available)
 	copy=Min(size, available);
 if(!copy)
 	return 0;
-ZeroMemory(&pBuffer[uPosition], copy);
+ZeroMemory(&m_Buffer[uPosition], copy);
 uPosition+=copy;
 return copy;
 }
