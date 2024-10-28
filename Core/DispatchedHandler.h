@@ -41,15 +41,12 @@ public:
 		}
 	static VOID Remove(Handle<DispatchedHandler>& Dispatched, DispatchedHandler* Handler);
 	virtual VOID Run()=0;
-	virtual VOID Wait()=0;
 
 protected:
 	// Con-/Destructors
 	DispatchedHandler() {}
 
 	// Common
-	Concurrency::Signal m_Done;
-	Concurrency::Mutex m_Mutex;
 	Handle<DispatchedHandler> m_Next;
 };
 
@@ -70,19 +67,7 @@ public:
 	DispatchedProcedure(_proc_t Procedure): m_Procedure(Procedure) {}
 
 	// Common
-	VOID Run()override
-		{
-		Concurrency::ScopedLock lock(m_Mutex);
-		(*m_Procedure)();
-		m_Procedure=nullptr;
-		m_Done.Trigger();
-		}
-	VOID Wait()override
-		{
-		Concurrency::ScopedLock lock(m_Mutex);
-		if(m_Procedure)
-			m_Done.Wait(lock);
-		}
+	inline VOID Run()override { (*m_Procedure)(); }
 
 private:
 	// Common
@@ -110,19 +95,7 @@ public:
 		{}
 
 	// Common
-	VOID Run()override
-		{
-		Concurrency::ScopedLock lock(m_Mutex);
-		(m_Owner->*m_Procedure)();
-		m_Procedure=nullptr;
-		m_Done.Trigger();
-		}
-	VOID Wait()override
-		{
-		Concurrency::ScopedLock lock(m_Mutex);
-		if(m_Procedure)
-			m_Done.Wait(lock);
-		}
+	inline VOID Run()override { (m_Owner->*m_Procedure)(); }
 
 private:
 	// Common
@@ -147,19 +120,7 @@ public:
 		m_Owner(Owner) {}
 
 	// Common
-	inline VOID Run()override
-		{
-		Concurrency::ScopedLock lock(m_Mutex);
-		m_Lambda();
-		m_Owner=nullptr;
-		m_Done.Trigger();
-		}
-	VOID Wait()override
-		{
-		Concurrency::ScopedLock lock(m_Mutex);
-		if(m_Owner)
-			m_Done.Wait(lock);
-		}
+	inline VOID Run()override { m_Lambda(); }
 
 private:
 	// Common
