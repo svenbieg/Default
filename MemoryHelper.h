@@ -12,31 +12,6 @@
 #define ALIGN(x) __attribute__((aligned(x)))
 #define PACKED __attribute__((packed))
 
-#define _STR(s) #s
-#define STR(s) _STR(s)
-
-template <class _item_t, UINT _Count> constexpr UINT ArraySize(_item_t (&)[_Count])
-{
-return _Count;
-}
-
-template <class _size1_t, class _size2_t> inline _size1_t Max(_size1_t Value1, _size2_t Value2)
-{
-if(Value1>Value2)
-	return Value1;
-return Value2;
-}
-
-template <class _size1_t, class _size2_t> inline _size1_t Min(_size1_t Value1, _size2_t Value2)
-{
-if(Value1<Value2)
-	return Value1;
-return Value2;
-}
-
-inline UINT HighLong(UINT64 Value) { return (UINT)(Value>>32); }
-inline UINT LowLong(UINT64 Value) { return (UINT)Value; }
-
 
 //========
 // Common

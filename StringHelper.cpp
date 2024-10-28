@@ -158,12 +158,12 @@ BOOL StringFindChars(LPCWSTR str, LPCSTR find, UINT* pos_ptr, BOOL cs)
 return StringFindChars<WCHAR, CHAR>(str, find, pos_ptr, cs);
 }
 
-template <class _char_t> inline UINT StringLength(_char_t const* Value)
+template <class _char_t> inline UINT StringLength(_char_t const* value)
 {
-if(!Value)
+if(!value)
 	return 0;
 UINT len=0;
-for(; Value[len]; len++);
+for(; value[len]; len++);
 return len;
 }
 
@@ -177,16 +177,16 @@ UINT StringLength(LPCWSTR str)
 return StringLength<WCHAR>(str);
 }
 
-template <class _char_t> inline UINT StringLength(_char_t const* Value, UINT Maximum)
+template <class _char_t> inline UINT StringLength(_char_t const* value, UINT max)
 {
-if(!Value)
+if(!value)
 	return 0;
-if(!Maximum)
-	Maximum=UINT_MAX;
+if(!max)
+	max=UINT_MAX;
 UINT len=0;
-for(; Value[len]; len++)
+for(; value[len]; len++)
 	{
-	if(len==Maximum)
+	if(len==max)
 		break;
 	}
 return len;

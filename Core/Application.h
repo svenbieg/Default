@@ -28,25 +28,29 @@ class Application: public Object
 public:
 	// Common
 	static Handle<Application> Current;
-	inline VOID Dispatch(VOID (*Procedure)())
+	inline Handle<DispatchedHandler> Dispatch(VOID (*Procedure)())
 		{
 		DispatchedHandler* handler=new Details::DispatchedProcedure(Procedure);
 		DispatchHandler(handler);
+		return handler;
 		}
-	template <class _owner_t, class... _args_t> inline VOID Dispatch(_owner_t* Owner, VOID (_owner_t::*Procedure)())
+	template <class _owner_t, class... _args_t> inline Handle<DispatchedHandler> Dispatch(_owner_t* Owner, VOID (_owner_t::*Procedure)())
 		{
 		DispatchedHandler* handler=new Details::DispatchedMemberProcedure<_owner_t>(Owner, Procedure);
 		DispatchHandler(handler);
+		return handler;
 		}
-	template <class _owner_t, class _lambda_t> inline VOID Dispatch(_owner_t* Owner, _lambda_t&& Lambda)
+	template <class _owner_t, class _lambda_t> inline Handle<DispatchedHandler> Dispatch(_owner_t* Owner, _lambda_t&& Lambda)
 		{
 		DispatchedHandler* handler=new Details::DispatchedLambda<_owner_t, _lambda_t>(Owner, std::forward<_lambda_t>(Lambda));
 		DispatchHandler(handler);
+		return handler;
 		}
-	template <class _owner_t, class _lambda_t> inline VOID Dispatch(Handle<_owner_t> Owner, _lambda_t&& Lambda)
+	template <class _owner_t, class _lambda_t> inline Handle<DispatchedHandler> Dispatch(Handle<_owner_t> Owner, _lambda_t&& Lambda)
 		{
 		DispatchedHandler* handler=new Details::DispatchedLambda<_owner_t, _lambda_t>(Owner, std::forward<_lambda_t>(Lambda));
 		DispatchHandler(handler);
+		return handler;
 		}
 	virtual VOID DispatchHandler(DispatchedHandler* Handler);
 	LPCSTR Name;

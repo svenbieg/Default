@@ -25,13 +25,13 @@ namespace Storage {
 
 Buffer::Buffer(SIZE_T size):
 m_Buffer(new BYTE[size]),
-uPosition(0),
+m_Position(0),
 m_Size(size)
 {}
 
 Buffer::Buffer(VOID const* buf, SIZE_T size):
 m_Buffer(new BYTE[size]),
-uPosition(0),
+m_Position(0),
 m_Size(size)
 {
 CopyMemory(m_Buffer, buf, size);
@@ -53,16 +53,16 @@ if(m_Buffer)
 
 SIZE_T Buffer::Available()
 {
-return m_Size-uPosition;
+return m_Size-m_Position;
 }
 
 SIZE_T Buffer::Read(VOID* buf, SIZE_T size)
 {
-SIZE_T available=m_Size-uPosition;
+SIZE_T available=m_Size-m_Position;
 SIZE_T copy=Min(size, available);
 if(buf)
-	CopyMemory(buf, &m_Buffer[uPosition], copy);
-uPosition+=copy;
+	CopyMemory(buf, &m_Buffer[m_Position], copy);
+m_Position+=copy;
 return copy;
 }
 
@@ -77,10 +77,10 @@ VOID Buffer::Flush()
 
 SIZE_T Buffer::Write(VOID const* buf, SIZE_T size)
 {
-SIZE_T available=m_Size-uPosition;
+SIZE_T available=m_Size-m_Position;
 SIZE_T copy=Min(size, available);
-CopyMemory(&m_Buffer[uPosition], buf, copy);
-uPosition+=copy;
+CopyMemory(&m_Buffer[m_Position], buf, copy);
+m_Position+=copy;
 return copy;
 }
 
@@ -93,7 +93,7 @@ BOOL Buffer::Seek(FILE_SIZE pos)
 {
 if(pos>m_Size-1)
 	return false;
-uPosition=(SIZE_T)pos;
+m_Position=(SIZE_T)pos;
 return true;
 }
 
@@ -104,23 +104,23 @@ return true;
 
 SIZE_T Buffer::Fill(UINT value, SIZE_T size)
 {
-SIZE_T available=m_Size-uPosition;
+SIZE_T available=m_Size-m_Position;
 if(size==0)
 	size=available;
 SIZE_T copy=Min(size, available);
-FillMemory(&m_Buffer[uPosition], copy, value);
-uPosition+=copy;
+FillMemory(&m_Buffer[m_Position], copy, value);
+m_Position+=copy;
 return copy;
 }
 
 SIZE_T Buffer::Zero(SIZE_T size)
 {
-SIZE_T available=m_Size-uPosition;
+SIZE_T available=m_Size-m_Position;
 if(size==0)
 	size=available;
 SIZE_T copy=Min(size, available);
-ZeroMemory(&m_Buffer[uPosition], copy);
-uPosition+=copy;
+ZeroMemory(&m_Buffer[m_Position], copy);
+m_Position+=copy;
 return copy;
 }
 

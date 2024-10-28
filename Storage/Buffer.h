@@ -53,7 +53,7 @@ public:
 private:
 	// Common
 	BYTE* m_Buffer;
-	SIZE_T uPosition;
+	SIZE_T m_Position;
 	SIZE_T m_Size;
 };
 

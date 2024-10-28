@@ -34,7 +34,7 @@ public:
 	SIZE_T Read(VOID* Buffer, SIZE_T Size)override;
 
 	// Output-Stream
-	VOID Flush()override;
+	inline VOID Flush()override {}
 	SIZE_T Write(VOID const* Buffer, SIZE_T Size)override;
 
 	// Seekable
@@ -51,7 +51,7 @@ public:
 private:
 	// Common
 	BYTE* m_Buffer;
-	SIZE_T uPosition;
+	SIZE_T m_Position;
 	SIZE_T m_Size;
 };
 

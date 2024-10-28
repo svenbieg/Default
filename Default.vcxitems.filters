@@ -24,17 +24,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\RandomAccessStream.h">
       <Filter>Storage\Streams</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\DynamicBuffer.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Seekable.h">
       <Filter>Storage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Buffer.h">
       <Filter>Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Container.h">
-      <Filter>Collections</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DynamicHandle.h" />
@@ -128,9 +122,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)UnknownClass.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Object.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StringClass.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\DynamicBuffer.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Buffer.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
