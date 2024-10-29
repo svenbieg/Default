@@ -27,7 +27,7 @@ class Intermediate: public Streams::RandomAccessStream
 {
 public:
 	// Con-/Destructors
-	Intermediate(UINT BlockSize);
+	Intermediate(UINT BlockSize=PAGE_SIZE);
 	~Intermediate();
 
 	// Common
