@@ -20,6 +20,7 @@
 #include "DynamicHandle.h"
 #include "DynamicPointer.h"
 #include "Event.h"
+#include "Exception.h"
 #include "FlagHelper.h"
 #include "Function.h"
 #include "PathHelper.h"

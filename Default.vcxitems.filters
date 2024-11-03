@@ -114,6 +114,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Node.h">
       <Filter>Collections</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Exception.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
@@ -152,7 +153,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Streams\StreamReader.cpp">
       <Filter>Storage\Streams</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MemoryHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Core\DispatchedHandler.cpp">
       <Filter>Core</Filter>
     </ClCompile>

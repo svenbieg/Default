@@ -107,16 +107,19 @@ template <class _str_t, class _char_t> inline BOOL StringFindChar(_str_t const* 
 {
 if(!str||!c)
 	return false;
-for(UINT pos=0; str[pos]; pos++)
+BOOL found=false;
+UINT pos=0;
+for(; str[pos]; pos++)
 	{
 	if(CharCompare(str[pos], c, cs)==0)
 		{
-		if(pos_ptr)
-			*pos_ptr=pos;
-		return true;
+		found=true;
+		break;
 		}
 	}
-return false;
+if(pos_ptr)
+	*pos_ptr=pos;
+return found;
 }
 
 BOOL StringFindChar(LPCSTR str, CHAR c, UINT* pos_ptr, BOOL cs)
@@ -133,7 +136,8 @@ template <class _char_t, class _find_t> inline BOOL StringFindChars(_char_t cons
 {
 if(!str||!find)
 	return false;
-for(UINT pos=0; str[pos]; pos++)
+UINT pos=0;
+for(; str[pos]; pos++)
 	{
 	for(UINT find_pos=0; find[find_pos]; find_pos++)
 		{
@@ -145,6 +149,8 @@ for(UINT pos=0; str[pos]; pos++)
 			}
 		}
 	}
+if(pos_ptr)
+	*pos_ptr=pos;
 return false;
 }
 

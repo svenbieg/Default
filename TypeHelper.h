@@ -15,8 +15,6 @@ typedef decltype(nullptr) nullptr_t;
 
 typedef unsigned char BYTE;
 typedef unsigned short int WORD;
-typedef unsigned long int DWORD;
-typedef long long unsigned int QWORD;
 
 typedef int BOOL;
 
@@ -30,8 +28,7 @@ constexpr INT INT_MIN=-0x7FFFFFFF;
 typedef unsigned int UINT;
 constexpr UINT UINT_MAX=0xFFFFFFFF;
 
-typedef long long int INT64;
-typedef long long unsigned int UINT64;
+typedef long int LONG;
 
 typedef float FLOAT;
 typedef double DOUBLE;
@@ -62,8 +59,8 @@ typedef VOID (*PROCEDURE)();
 // Common
 //========
 
-#define _STR(s) #s
-#define STR(s) _STR(s)
+#define __str(s) #s
+#define STR(s) __str(s)
 
 template <class _item_t, UINT _Count> constexpr UINT ArraySize(_item_t (&)[_Count])
 {
@@ -100,4 +97,28 @@ return (((UINT)High)<<16)|Low;
 inline UINT64 MakeLong(UINT Low, UINT High)
 {
 return (((UINT64)High)<<32)|Low;
+}
+
+
+//============
+// Big Endian
+//============
+
+template <class _value_t> inline _value_t BigEndian(_value_t Value)
+{
+static_assert(false);
+}
+
+template <> inline WORD BigEndian(WORD Value)
+{
+return (Value>>8)|(Value<<8);
+}
+
+template <> inline UINT BigEndian(UINT Value)
+{
+UINT value=(Value>>24);
+value|=(Value>>8)&0xFF00;
+value|=(Value<<8)&0xFF0000;
+value|=(Value<<24);
+return value;
 }
