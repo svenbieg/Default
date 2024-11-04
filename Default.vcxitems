@@ -50,7 +50,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)PathHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Platform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Property.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)StatusClass.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Status.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Buffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Directory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\File.h" />

@@ -44,7 +44,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Vector.h">
       <Filter>Collections</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StatusClass.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Status.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Volume.h">
       <Filter>Storage</Filter>
     </ClInclude>
