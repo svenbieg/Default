@@ -25,6 +25,6 @@
 #include "Function.h"
 #include "PathHelper.h"
 #include "Property.h"
-#include "StatusClass.h"
+#include "Status.h"
 #include "StringClass.h"
 #include "VariableArguments.h"
