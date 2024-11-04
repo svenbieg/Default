@@ -64,6 +64,13 @@ public:
 	NotImplementedException(): Exception(Status::NotImplemented) {}
 };
 
+class OutOfMemoryException: public Exception
+{
+public:
+	// Con-/Destructors
+	OutOfMemoryException(): Exception(Status::OutOfMemory) {}
+};
+
 class OutOfRangeException: public Exception
 {
 public:
