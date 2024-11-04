@@ -35,10 +35,10 @@ Timeout
 
 inline bool Succeeded(Status Status)
 {
-return !((UINT)Status&(UINT)Status::Error);
+return !GetFlag(Status, Status::Error);
 }
 
 inline bool Failed(Status Status)
 {
-return ((UINT)Status&(UINT)Status::Error);
+return GetFlag(Status, Status::Error);
 }
