@@ -115,6 +115,9 @@
       <Filter>Collections</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Exception.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Encoding\Dwarf\Dwarf.h">
+      <Filter>Storage\Encoding\Dwarf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
@@ -159,6 +162,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Collections\Node.cpp">
       <Filter>Collections</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Encoding\Dwarf\Dwarf.cpp">
+      <Filter>Storage\Encoding\Dwarf</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Storage">
@@ -175,6 +181,12 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{bff08e3e-51aa-4b21-9a7a-07516a794c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Storage\Encoding">
+      <UniqueIdentifier>{0839ad31-9b52-4a75-ae7b-3f6be2828f3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Storage\Encoding\Dwarf">
+      <UniqueIdentifier>{42658492-a0f4-43dd-8d2b-b1ba1a167023}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -53,6 +53,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Status.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Buffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Directory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Encoding\Dwarf\Dwarf.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\File.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Intermediate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Seekable.h" />
@@ -82,6 +83,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)PathHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Buffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Directory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Encoding\Dwarf\Dwarf.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\File.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Intermediate.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\StaticBuffer.cpp" />
