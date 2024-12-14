@@ -120,9 +120,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Concurrency\DispatchedQueue.h">
       <Filter>Concurrency</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Concurrency\MainTask.h">
-      <Filter>Concurrency</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />

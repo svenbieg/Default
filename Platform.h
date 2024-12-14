@@ -16,7 +16,6 @@
 // Common
 //========
 
-#include "Concurrency/MainTask.h"
 #include "CharHelper.h"
 #include "DynamicHandle.h"
 #include "DynamicPointer.h"
