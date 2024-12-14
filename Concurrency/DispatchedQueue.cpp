@@ -25,20 +25,17 @@ namespace Concurrency {
 
 VOID DispatchedQueue::Append(DispatchedHandler* handler)
 {
+assert(handler->m_Next==nullptr);
 ScopedLock lock(s_Mutex);
-Append(&s_Handler, handler);
-s_Signal.Trigger();
-}
-
-VOID DispatchedQueue::Append(DispatchedHandler** queue, DispatchedHandler* handler)
-{
-auto current_ptr=queue;
-while(*current_ptr)
+if(!s_Last)
 	{
-	auto current=*current_ptr;
-	current_ptr=&current->m_Next;
+	s_First=handler;
+	s_Last=handler;
+	return;
 	}
-*current_ptr=handler;
+s_Last->m_Next=handler;
+s_Last=handler;
+s_Signal.Trigger();
 }
 
 VOID DispatchedQueue::Begin()
@@ -56,14 +53,16 @@ s_Signal.Cancel();
 VOID DispatchedQueue::Run()
 {
 ScopedLock lock(s_Mutex);
-while(s_Handler)
+auto handler=s_First;
+s_First=nullptr;
+s_Last=nullptr;
+lock.Unlock();
+while(handler)
 	{
-	auto handler=s_Handler;
-	s_Handler=handler->m_Next;
-	lock.Unlock();
 	handler->Run();
+	auto next=handler->m_Next;
 	delete handler;
-	lock.Lock();
+	handler=next;
 	}
 }
 
@@ -72,7 +71,8 @@ while(s_Handler)
 // Common Private
 //================
 
-DispatchedHandler* DispatchedQueue::s_Handler;
+DispatchedHandler* DispatchedQueue::s_First=nullptr;
+DispatchedHandler* DispatchedQueue::s_Last=nullptr;
 Mutex DispatchedQueue::s_Mutex;
 Signal DispatchedQueue::s_Signal;
 
