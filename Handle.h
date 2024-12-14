@@ -108,5 +108,5 @@ public:
 	using _base_t::_base_t;
 
 	// Access
-	template <class _convert_t> inline Handle<_convert_t> As() { return dynamic_cast<_convert_t*>(m_Object); }
+	template <class _convert_t> inline Handle<_convert_t> As() { return dynamic_cast<_convert_t*>(_base_t::m_Object); }
 };
