@@ -36,6 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Vector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Concurrency\DispatchedHandler.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Concurrency\DispatchedQueue.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Concurrency\MainTask.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Core\Application.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DynamicHandle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DynamicPointer.h" />

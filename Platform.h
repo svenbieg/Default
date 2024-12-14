@@ -5,10 +5,18 @@
 #pragma once
 
 
+//======================
+// Forward-Declarations
+//======================
+
+#include "TypeHelper.h"
+
+
 //========
 // Common
 //========
 
+#include "Concurrency/MainTask.h"
 #include "CharHelper.h"
 #include "DynamicHandle.h"
 #include "DynamicPointer.h"
@@ -16,7 +24,6 @@
 #include "Exception.h"
 #include "FlagHelper.h"
 #include "Function.h"
-#include "MemoryHelper.h"
 #include "PathHelper.h"
 #include "Property.h"
 #include "Status.h"
