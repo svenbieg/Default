@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include "Concurrency/TaskLock.h"
 #include "DispatchedQueue.h"
 
 
@@ -26,7 +27,7 @@ namespace Concurrency {
 VOID DispatchedQueue::Append(DispatchedHandler* handler)
 {
 assert(handler->m_Next==nullptr);
-ScopedLock lock(s_Mutex);
+TaskLock lock(s_Mutex);
 if(!s_Last)
 	{
 	s_First=handler;
@@ -40,8 +41,7 @@ s_Signal.Trigger();
 
 VOID DispatchedQueue::Begin()
 {
-ScopedLock lock(s_Mutex);
-while(s_Signal.Wait(lock))
+while(s_Signal.Wait())
 	Run();
 }
 
@@ -52,7 +52,7 @@ s_Signal.Cancel();
 
 VOID DispatchedQueue::Run()
 {
-ScopedLock lock(s_Mutex);
+TaskLock lock(s_Mutex);
 auto handler=s_First;
 s_First=nullptr;
 s_Last=nullptr;
