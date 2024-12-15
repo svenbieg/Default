@@ -32,6 +32,7 @@ public:
 	static VOID Begin();
 	static VOID Exit();
 	static VOID Run();
+	static BOOL Wait();
 
 private:
 	// Common
@@ -39,6 +40,7 @@ private:
 	static DispatchedHandler* s_Last;
 	static Mutex s_Mutex;
 	static Signal s_Signal;
+	static BOOL s_Waiting;
 };
 
 }
