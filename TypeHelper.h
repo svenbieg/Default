@@ -6,13 +6,6 @@
 
 
 //=======
-// Using
-//=======
-
-#include <stddef.h>
-
-
-//=======
 // Types
 //=======
 
@@ -22,8 +15,8 @@ typedef decltype(nullptr) nullptr_t;
 
 typedef unsigned char BYTE;
 typedef unsigned short int WORD;
-typedef unsigned __long DWORD;
-typedef unsigned __longlong QWORD;
+typedef unsigned long int DWORD;
+typedef unsigned long long int QWORD;
 
 typedef int BOOL;
 
@@ -37,8 +30,8 @@ constexpr INT INT_MIN=-0x7FFFFFFF;
 typedef unsigned int UINT;
 constexpr UINT UINT_MAX=0xFFFFFFFF;
 
-typedef __longlong int INT64;
-typedef unsigned __longlong int UINT64;
+typedef long long int INT64;
+typedef unsigned long long int UINT64;
 
 typedef float FLOAT;
 typedef double DOUBLE;

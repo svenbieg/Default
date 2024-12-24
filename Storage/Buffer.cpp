@@ -25,6 +25,7 @@ namespace Storage {
 
 Buffer::Buffer(SIZE_T size):
 m_Buffer(new BYTE[size]),
+m_Options(BufferOptions::None),
 m_Position(0),
 m_Size(size)
 {}
@@ -35,7 +36,6 @@ m_Options(options),
 m_Position(0),
 m_Size(size)
 {
-assert(size!=0);
 switch(options)
 	{
 	case BufferOptions::Static:
@@ -45,6 +45,8 @@ switch(options)
 		}
 	default:
 		{
+		if(size==0)
+			throw InvalidArgumentException();
 		m_Buffer=new BYTE[size];
 		MemoryHelper::Copy(m_Buffer, buf, size);
 		break;
@@ -65,12 +67,16 @@ if(m_Options!=BufferOptions::Static)
 
 SIZE_T Buffer::Available()
 {
+if(m_Size==0)
+	return 0;
 return m_Size-m_Position;
 }
 
 SIZE_T Buffer::Read(VOID* buf, SIZE_T size)
 {
-SIZE_T available=m_Size-m_Position;
+SIZE_T available=SIZE_MAX;
+if(m_Size!=0)
+	available=m_Size-m_Position;
 SIZE_T copy=TypeHelper::Min(size, available);
 if(buf)
 	MemoryHelper::Copy(buf, &m_Buffer[m_Position], copy);
@@ -85,6 +91,8 @@ return copy;
 
 SIZE_T Buffer::Write(VOID const* buf, SIZE_T size)
 {
+if(m_Size==0)
+	return 0;
 SIZE_T available=m_Size-m_Position;
 SIZE_T copy=TypeHelper::Min(size, available);
 MemoryHelper::Copy(&m_Buffer[m_Position], buf, copy);
@@ -99,7 +107,7 @@ return copy;
 
 BOOL Buffer::Seek(FILE_SIZE pos)
 {
-if(pos>m_Size-1)
+if(m_Size&&pos>m_Size-1)
 	return false;
 m_Position=(SIZE_T)pos;
 return true;
@@ -112,6 +120,8 @@ return true;
 
 SIZE_T Buffer::Fill(UINT value, SIZE_T size)
 {
+if(m_Size==0)
+	return 0;
 SIZE_T available=m_Size-m_Position;
 if(size==0)
 	size=available;
