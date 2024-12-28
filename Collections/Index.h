@@ -49,12 +49,8 @@ public:
 	friend ConstIterator;
 
 	// Con-/Destructors
-	Index() {}
-	Index(_index_t* Index)
-		{
-		if(Index)
-			m_Index.copy_from(Index->m_Index);
-		}
+	static inline Handle<Index> Create() { return new Index(); }
+	static inline Handle<Index> Create(_index_t const* Copy) { return new Index(Copy); }
 
 	// Access
 	inline Handle<Iterator> At(UINT Position) { return new Iterator(this, Position); }
@@ -89,9 +85,9 @@ public:
 		}
 
 	// Modification
-	template <typename _id_param_t> BOOL Add(_id_param_t&& Id, BOOL Notify=true)
+	BOOL Add(_id_t const& Id, BOOL Notify=true)
 		{
-		if(m_Index.add(std::forward<_id_param_t>(Id)))
+		if(m_Index.add(Id))
 			{
 			if(Notify)
 				{
@@ -127,9 +123,30 @@ public:
 			}
 		return false;
 		}
+	BOOL Set(_id_t const& Id, BOOL Notify=true)
+		{
+		if(m_Index.set(Id))
+			{
+			if(Notify)
+				{
+				Added(this, Id);
+				Changed(this);
+				}
+			return true;
+			}
+		return false;
+		}
 	Event<Index, _id_t> Removed;
 
 private:
+	// Con-/Destructors
+	Index() {}
+	Index(_index_t const* Copy)
+		{
+		if(Copy)
+			m_Index.copy_from(Copy->m_Index);
+		}
+
 	// Common
 	shared_index<_id_t, _size_t, _group_size> m_Index;
 };
@@ -147,11 +164,11 @@ private:
 	using _index_t=Index<_id_t, _size_t, _group_size>;
 
 public:
+	// Friends
+	friend Index;
+
 	// Using
 	using FindFunction=find_func;
-
-	// Con-/Destructors
-	IndexIterator(_index_t* Index, _size_t Position): m_It(&Index->m_Index, Position), m_Index(Index) {}
 
 	// Access
 	inline _id_t GetCurrent()const { return *m_It; }
@@ -177,6 +194,9 @@ public:
 		}
 
 private:
+	// Con-/Destructors
+	IndexIterator(_index_t* Index, _size_t Position): m_It(&Index->m_Index, Position), m_Index(Index) {}
+
 	// Common
 	typename shared_index<_id_t, _size_t, _group_size>::iterator m_It;
 	Handle<_index_t> m_Index;
@@ -191,11 +211,11 @@ private:
 	using _index_t=Index<_id_t, _size_t, _group_size>;
 
 public:
+	// Friends
+	friend Index;
+
 	// Using
 	using FindFunction=Clusters::find_func;
-
-	// Con-/Destructors
-	ConstIndexIterator(_index_t* Index, _size_t Position): m_It(&Index->m_Index, Position), m_Index(Index) {}
 
 	// Access
 	inline _id_t GetCurrent()const { return *m_It; }
@@ -207,6 +227,9 @@ public:
 	inline BOOL MovePrevious() { return m_It.move_previous(); }
 
 private:
+	// Con-/Destructors
+	ConstIndexIterator(_index_t* Index, _size_t Position): m_It(&Index->m_Index, Position), m_Index(Index) {}
+
 	// Common
 	typename shared_index<_id_t, _size_t, _group_size>::const_iterator m_It;
 	Handle<_index_t> m_Index;

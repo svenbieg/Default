@@ -48,12 +48,8 @@ public:
 	friend ConstIterator;
 
 	// Con-/Destructors
-	List() {}
-	List(_list_t* List)
-		{
-		if(List)
-			m_List.copy_from(List->m_List);
-		}
+	static inline Handle<List> Create() { return new List(); }
+	static inline Handle<List> Create(_list_t const* Copy) { return new List(Copy); }
 
 	// Access
 	inline Handle<Iterator> At(_size_t Position) { return new Iterator(this, Position); }
@@ -84,9 +80,9 @@ public:
 		}
 
 	// Modification
-	template <typename _item_param_t> BOOL Add(_item_param_t&& Item, BOOL Notify=true)
+	BOOL Add(_item_t const& Item, BOOL Notify=true)
 		{
-		if(m_List.add(std::forward<_item_param_t>(Item)))
+		if(m_List.add(Item))
 			{
 			if(Notify)
 				{
@@ -98,9 +94,9 @@ public:
 		return false;
 		}
 	Event<List, _item_t> Added;
-	template <typename _item_param_t> VOID Append(_item_param_t&& Item, BOOL Notify=true)
+	VOID Append(_item_t const& Item, BOOL Notify=true)
 		{
-		m_List.append(std::forward<_item_param_t>(Item));
+		m_List.append(Item);
 		if(Notify)
 			{
 			Added(this, Item);
@@ -118,9 +114,9 @@ public:
 			}
 		return false;
 		}
-	template <typename _item_param_t> BOOL InsertAt(_size_t Position, _item_param_t&& Item, BOOL Notify=true)
+	BOOL InsertAt(_size_t Position, _item_t const& Item, BOOL Notify=true)
 		{
-		if(m_List.insert_at(Position, std::forward<_item_param_t>(Item)))
+		if(m_List.insert_at(Position, Item))
 			{
 			if(Notify)
 				{
@@ -131,9 +127,9 @@ public:
 			}
 		return false;
 		}
-	template <typename _item_param_t> BOOL Remove(_item_param_t&& Item, BOOL Notify=true)
+	BOOL Remove(_item_t const& Item, BOOL Notify=true)
 		{
-		if(m_List.remove(std::forward<_item_param_t>(Item)))
+		if(m_List.remove(Item))
 			{
 			if(Notify)
 				{
@@ -171,9 +167,9 @@ public:
 		return true;
 		}
 	Event<List, _item_t> Removed;
-	template <typename _item_param_t> BOOL SetAt(_size_t Position, _item_param_t&& Item, BOOL Notify=true)
+	BOOL SetAt(_size_t Position, _item_t const& Item, BOOL Notify=true)
 		{
-		if(m_List.set_at(Position, std::forward<_item_param_t>(Item)))
+		if(m_List.set_at(Position, Item))
 			{
 			Changed(this);
 			return true;
@@ -182,6 +178,14 @@ public:
 		}
 
 protected:
+	// Con-/Destructors
+	List() {}
+	List(_list_t const* Copy)
+		{
+		if(Copy)
+			m_List.copy_from(Copy->m_List);
+		}
+
 	// Common
 	shared_list<_item_t, _size_t, _group_size> m_List;
 };
@@ -199,8 +203,8 @@ private:
 	using _list_t=List<_item_t, _size_t, _group_size>;
 
 public:
-	// Con-/Destructors
-	ListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), hList(List) {}
+	// Friends
+	friend List;
 
 	// Access
 	_item_t& GetCurrent()
@@ -255,6 +259,9 @@ public:
 		}
 
 private:
+	// Con-/Destructors
+	ListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), hList(List) {}
+
 	// Common
 	typename shared_list<_item_t, _size_t, _group_size>::iterator m_It;
 	Handle<_list_t> hList;
@@ -268,8 +275,8 @@ private:
 	using _list_t=List<_item_t, _size_t, _group_size>;
 
 public:
-	// Con-/Destructors
-	ConstListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), hList(List) {}
+	// Friends
+	friend List;
 
 	// Access
 	_item_t& GetCurrent()const { return *m_It; }
@@ -283,6 +290,9 @@ public:
 	BOOL MovePrevious() { return m_It.move_previous(); }
 
 private:
+	// Con-/Destructors
+	ConstListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), hList(List) {}
+
 	// Common
 	typename shared_list<_item_t, _size_t, _group_size>::const_iterator m_It;
 	Handle<_list_t> hList;

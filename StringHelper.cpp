@@ -1158,6 +1158,13 @@ UINT StringHelper::Copy(LPSTR dst, UINT size, LPCWSTR src, UINT copy)
 return StringCopy(dst, size, src, copy);
 }
 
+UINT StringHelper::Copy(LPSTR dst, UINT size, Handle<String> const& src, UINT copy)
+{
+if(!src)
+	return 0;
+return StringCopy(dst, size, src->Begin(), copy);
+}
+
 UINT StringHelper::Copy(LPWSTR dst, UINT size, LPCSTR src, UINT copy)
 {
 return StringCopy(dst, size, src, copy);
@@ -1166,6 +1173,13 @@ return StringCopy(dst, size, src, copy);
 UINT StringHelper::Copy(LPWSTR dst, UINT size, LPCWSTR src, UINT copy)
 {
 return StringCopy(dst, size, src, copy);
+}
+
+UINT StringHelper::Copy(LPWSTR dst, UINT size, Handle<String> const& src, UINT copy)
+{
+if(!src)
+	return 0;
+return StringCopy(dst, size, src->Begin(), copy);
 }
 
 BOOL StringHelper::Find(LPCSTR str, LPCSTR find, UINT* pos_ptr, BOOL cs)

@@ -49,12 +49,8 @@ public:
 	friend ConstIterator;
 
 	// Con-/Destructors
-	Map() {}
-	Map(_map_t* Map)
-		{
-		if(Map)
-			m_Map.copy_from(Map->m_Map);
-		}
+	static inline Handle<Map> Create() { return new Map(); }
+	static inline Handle<Map> Create(_map_t const* Copy) { return new Map(Copy); }
 
 	// Access
 	inline BOOL Contains(_key_t const& Key) { return m_Map.contains(Key); }
@@ -89,9 +85,9 @@ public:
 	inline BOOL TryGet(_key_t const& Key, _value_t* Value) { return m_Map.try_get(Key, Value); }
 
 	// Modification
-	template <typename _key_param_t, typename _value_param_t> BOOL Add(_key_param_t&& Key, _value_param_t&& Value, BOOL Notify=true)
+	BOOL Add(_key_t const& Key, _value_t const& Value, BOOL Notify=true)
 		{
-		if(m_Map.add(std::forward<_key_param_t>(Key), std::forward<_value_param_t>(Value)))
+		if(m_Map.add(Key, Value))
 			{
 			if(Notify)
 				{
@@ -142,9 +138,9 @@ public:
 		return true;
 		}
 	Event<Map, _key_t, _value_t> Removed;
-	template <typename _key_param_t, typename _value_param_t> BOOL Set(_key_param_t&& Key, _value_param_t&& Value, BOOL Notify=true)
+	BOOL Set(_key_t const& Key, _value_t const& Value, BOOL Notify=true)
 		{
-		if(m_Map.set(std::forward<_key_param_t>(Key), std::forward<_value_param_t>(Value)))
+		if(m_Map.set(Key, Value))
 			{
 			if(Notify)
 				Changed(this);
@@ -154,6 +150,14 @@ public:
 		}
 
 protected:
+	// Con-/Destructors
+	Map() {}
+	Map(_map_t* Copy)
+		{
+		if(Copy)
+			m_Map.copy_from(Copy->m_Map);
+		}
+
 	// Common
 	shared_map<_key_t, _value_t, _size_t, _group_size> m_Map;
 };

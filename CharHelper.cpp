@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include <assert.h>
 #include "CharHelper.h"
 
 using namespace Storage::Streams;

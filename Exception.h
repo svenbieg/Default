@@ -43,6 +43,20 @@ public:
 	AbortException(): Exception(Status::Aborted) {}
 };
 
+class AccessDeniedException: public Exception
+{
+public:
+	// Con-/Destructors
+	AccessDeniedException(): Exception(Status::AccessDenied) {}
+};
+
+class ConnectionFailedException: public Exception
+{
+public:
+	// Con-/Destructors
+	ConnectionFailedException(): Exception(Status::ConnectionFailed) {}
+};
+
 class DeviceNotReadyException: public Exception
 {
 public:
@@ -62,6 +76,13 @@ class InvalidContextException: public Exception
 public:
 	// Con-/Destructors
 	InvalidContextException(): Exception(Status::InvalidContext) {}
+};
+
+class NotFoundException: public Exception
+{
+public:
+	// Con-/Destructors
+	NotFoundException(): Exception(Status::NotFound) {}
 };
 
 class NotImplementedException: public Exception

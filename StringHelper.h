@@ -54,8 +54,10 @@ public:
 	static INT Compare(LPCWSTR Value1, LPCWSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
 	static UINT Copy(LPSTR Destination, UINT Size, LPCSTR Source, UINT Length=0);
 	static UINT Copy(LPSTR Destination, UINT Size, LPCWSTR Source, UINT Length=0);
+	static UINT Copy(LPSTR Destination, UINT Size, Handle<String> const& Source, UINT Length=0);
 	static UINT Copy(LPWSTR Destination, UINT Size, LPCSTR Source, UINT Length=0);
 	static UINT Copy(LPWSTR Destination, UINT Size, LPCWSTR Source, UINT Length=0);
+	static UINT Copy(LPWSTR Destination, UINT Size, Handle<String> const& Source, UINT Length=0);
 	static BOOL Find(LPCSTR String, LPCSTR Find, UINT* Position=nullptr, BOOL CaseSensitive=true);
 	static BOOL Find(LPCSTR String, LPCWSTR Find, UINT* Position=nullptr, BOOL CaseSensitive=true);
 	static BOOL Find(LPCWSTR String, LPCSTR Find, UINT* Position=nullptr, BOOL CaseSensitive=true);
