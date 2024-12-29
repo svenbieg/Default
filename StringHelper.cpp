@@ -1138,6 +1138,11 @@ INT StringHelper::Compare(LPCSTR str1, LPCWSTR str2, UINT len, BOOL cs)
 return StringCompare(str1, str2, len, cs);
 }
 
+INT StringHelper::Compare(LPCSTR str1, Handle<String> const& str2, UINT len, BOOL cs)
+{
+return StringCompare(str1, str2? str2->Begin(): nullptr, len, cs);
+}
+
 INT StringHelper::Compare(LPCWSTR str1, LPCSTR str2, UINT len, BOOL cs)
 {
 return StringCompare(str1, str2, len, cs);
@@ -1146,6 +1151,26 @@ return StringCompare(str1, str2, len, cs);
 INT StringHelper::Compare(LPCWSTR str1, LPCWSTR str2, UINT len, BOOL cs)
 {
 return StringCompare(str1, str2, len, cs);
+}
+
+INT StringHelper::Compare(LPCWSTR str1, Handle<String> const& str2, UINT len, BOOL cs)
+{
+return StringCompare(str1, str2? str2->Begin(): nullptr, len, cs);
+}
+
+INT StringHelper::Compare(Handle<String> const& str1, LPCSTR str2, UINT len, BOOL cs)
+{
+return StringCompare(str1? str1->Begin(): nullptr, str2, len, cs);
+}
+
+INT StringHelper::Compare(Handle<String> const& str1, LPCWSTR str2, UINT len, BOOL cs)
+{
+return StringCompare(str1? str1->Begin(): nullptr, str2, len, cs);
+}
+
+INT StringHelper::Compare(Handle<String> const& str1, Handle<String> const& str2, UINT len, BOOL cs)
+{
+return StringCompare(str1? str1->Begin(): nullptr, str2? str2->Begin(): nullptr, len, cs);
 }
 
 UINT StringHelper::Copy(LPSTR dst, UINT size, LPCSTR src, UINT copy)

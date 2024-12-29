@@ -50,8 +50,13 @@ public:
 	static UINT Append(LPSTR Destination, UINT Size, LPCSTR String, LPCSTR Append);
 	static INT Compare(LPCSTR Value1, LPCSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
 	static INT Compare(LPCSTR Value1, LPCWSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
+	static INT Compare(LPCSTR Value1, Handle<String> const& Value2, UINT Length=0, BOOL CaseSensitive=true);
 	static INT Compare(LPCWSTR Value1, LPCSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
 	static INT Compare(LPCWSTR Value1, LPCWSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
+	static INT Compare(LPCWSTR Value1, Handle<String> const& Value2, UINT Length=0, BOOL CaseSensitive=true);
+	static INT Compare(Handle<String> const& Value1, LPCSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
+	static INT Compare(Handle<String> const& Value1, LPCWSTR Value2, UINT Length=0, BOOL CaseSensitive=true);
+	static INT Compare(Handle<String> const& Value1, Handle<String> const& Value2, UINT Length=0, BOOL CaseSensitive=true);
 	static UINT Copy(LPSTR Destination, UINT Size, LPCSTR Source, UINT Length=0);
 	static UINT Copy(LPSTR Destination, UINT Size, LPCWSTR Source, UINT Length=0);
 	static UINT Copy(LPSTR Destination, UINT Size, Handle<String> const& Source, UINT Length=0);
