@@ -37,8 +37,6 @@ class CallableTyped: public Callable<_ret_t, _args_t...>
 {
 public:
 	// Con-/Destructors
-	CallableTyped(CallableTyped const& Copy): m_Lambda(Copy.m_Lambda) {}
-	CallableTyped(CallableTyped&& Move): m_Lambda(std::move(Move.m_Lambda)) {}
 	CallableTyped(_lambda_t&& lambda): m_Lambda(std::move(lambda)) {}
 
 	// Common
@@ -63,7 +61,8 @@ class Function
 public:
 	// Con-/Destructors
 	Function() {}
-	Function(Function const& Function): m_Callable(Function.m_Callable) {}
+	Function(Function const& Copy): m_Callable(Copy.m_Callable) {}
+	Function(Function&& Move): m_Callable(Move.m_Callable) { Move.m_Callable=nullptr; }
 	template<class _lambda_t> Function(_lambda_t&& Lambda)
 		{
 		m_Callable=new CallableTyped<_lambda_t, _ret_t, _args_t...>(std::forward<_lambda_t>(Lambda));
@@ -75,9 +74,9 @@ public:
 		{
 		return m_Callable->Call(Arguments...);
 		}
-	inline Function& operator=(nullptr_t)
+	inline Function& operator=(Function const& Copy)
 		{
-		m_Callable=nullptr;
+		m_Callable=Copy.m_Callable;
 		return *this;
 		}
 
