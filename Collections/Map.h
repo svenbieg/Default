@@ -175,11 +175,11 @@ private:
 	using _map_t=Map<_key_t, _value_t, _size_t, _group_size>;
 
 public:
+	// Friends
+	friend _map_t;
+
 	// Using
 	using FindFunction=find_func;
-
-	// Con-/Destructors
-	MapIterator(_map_t* Map, _size_t Position): m_It(&Map->m_Map, Position), m_Map(Map) {}
 
 	// Access
 	inline _key_t GetKey()const { return m_It->get_key(); }
@@ -214,6 +214,9 @@ public:
 		}
 
 private:
+	// Con-/Destructors
+	MapIterator(_map_t* Map, _size_t Position): m_It(&Map->m_Map, Position), m_Map(Map) {}
+
 	// Common
 	typename shared_map<_key_t, _value_t, _size_t, _group_size>::iterator m_It;
 	Handle<_map_t> m_Map;
@@ -227,11 +230,11 @@ private:
 	using _map_t=Map<_key_t, _value_t, _size_t, _group_size>;
 
 public:
+	// Friends
+	friend _map_t;
+
 	// Using
 	using FindFunction=find_func;
-
-	// Con-/Destructors
-	ConstMapIterator(_map_t* Map, _size_t Position): m_It(&Map->m_Map, Position), m_Map(Map) {}
 
 	// Access
 	inline _key_t GetKey()const { return m_It->get_key(); }
@@ -247,6 +250,9 @@ public:
 	inline BOOL MovePrevious() { return m_It.move_previous(); }
 	
 private:
+	// Con-/Destructors
+	ConstMapIterator(_map_t* Map, _size_t Position): m_It(&Map->m_Map, Position), m_Map(Map) {}
+
 	// Common
 	typename shared_map<_key_t, _value_t, _size_t, _group_size>::const_iterator m_It;
 	Handle<_map_t> m_Map;

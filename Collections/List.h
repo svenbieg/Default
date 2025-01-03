@@ -204,7 +204,7 @@ private:
 
 public:
 	// Friends
-	friend List;
+	friend _list_t;
 
 	// Access
 	_item_t& GetCurrent()
@@ -253,18 +253,18 @@ public:
 			return false;
 		_item_t item=m_It.get_current();
 		m_It.remove_current();
-		hList->Removed(hList, item);
-		hList->Changed(hList);
+		m_List->Removed(m_List, item);
+		m_List->Changed(m_List);
 		return true;
 		}
 
 private:
 	// Con-/Destructors
-	ListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), hList(List) {}
+	ListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), m_List(List) {}
 
 	// Common
 	typename shared_list<_item_t, _size_t, _group_size>::iterator m_It;
-	Handle<_list_t> hList;
+	Handle<_list_t> m_List;
 };
 
 template <typename _item_t, typename _size_t, WORD _group_size>
@@ -276,7 +276,7 @@ private:
 
 public:
 	// Friends
-	friend List;
+	friend _list_t;
 
 	// Access
 	_item_t& GetCurrent()const { return *m_It; }
@@ -291,11 +291,11 @@ public:
 
 private:
 	// Con-/Destructors
-	ConstListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), hList(List) {}
+	ConstListIterator(_list_t* List, _size_t Position): m_It(&List->m_List, Position), m_List(List) {}
 
 	// Common
 	typename shared_list<_item_t, _size_t, _group_size>::const_iterator m_It;
-	Handle<_list_t> hList;
+	Handle<_list_t> m_List;
 };
 
 }

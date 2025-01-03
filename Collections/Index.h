@@ -165,7 +165,7 @@ private:
 
 public:
 	// Friends
-	friend Index;
+	friend _index_t;
 
 	// Using
 	using FindFunction=find_func;
@@ -212,7 +212,7 @@ private:
 
 public:
 	// Friends
-	friend Index;
+	friend _index_t;
 
 	// Using
 	using FindFunction=Clusters::find_func;
