@@ -53,7 +53,23 @@ public:
 	static inline Handle<Map> Create(_map_t const* Copy) { return new Map(Copy); }
 
 	// Access
+	inline Handle<Iterator> At(UINT Position) { return new Iterator(this, Position); }
+	inline Handle<ConstIterator> AtConst(UINT Position) { return new ConstIterator(this, Position); }
+	inline Handle<Iterator> Begin() { return new Iterator(this, 0); }
+	inline Handle<ConstIterator> BeginConst() { return new ConstIterator(this, 0); }
 	inline BOOL Contains(_key_t const& Key) { return m_Map.contains(Key); }
+	inline Handle<Iterator> End()
+		{
+		auto it=new Iterator(this, -2);
+		it->End();
+		return it;
+		}
+	inline Handle<ConstIterator> EndConst()
+		{
+		auto it=new ConstIterator(this, -2);
+		it->End();
+		return it;
+		}
 	inline Handle<Iterator> Find(_key_t const& Key, FindFunction Function=FindFunction::equal)
 		{
 		auto it=new Iterator(this, -2);
@@ -66,22 +82,8 @@ public:
 		it->Find(Key, Function);
 		return it;
 		}
-	inline Handle<Iterator> First() { return new Iterator(this, 0); }
-	inline Handle<Iterator> FirstConst() { return new ConstIterator(this, 0); }
 	inline _value_t Get(_key_t const& Key) { return m_Map.get(Key); }
 	inline _size_t GetCount() { return m_Map.get_count(); }
-	inline Handle<Iterator> Last()
-		{
-		auto it=new Iterator(this, -2);
-		it->Last();
-		return it;
-		}
-	inline Handle<Iterator> LastConst()
-		{
-		auto it=new ConstIterator(this, -2);
-		it->Last();
-		return it;
-		}
 	inline BOOL TryGet(_key_t const& Key, _value_t* Value) { return m_Map.try_get(Key, Value); }
 
 	// Modification
@@ -187,10 +189,10 @@ public:
 	inline BOOL HasCurrent()const { return m_It.has_current(); }
 
 	// Navigation
+	inline BOOL Begin() { return m_It.begin(); }
+	inline BOOL End() { return m_It.rbegin(); }
 	inline BOOL Find(_key_t const& Key, FindFunction Function=FindFunction::equal) { return m_It.find(Key, Function); }
-	inline BOOL First() { return m_It.begin(); }
 	inline _size_t GetPosition() { return m_It.get_position(); }
-	inline BOOL Last() { return m_It.rbegin(); }
 	inline BOOL MoveNext() { return m_It.move_next(); }
 	inline BOOL MovePrevious() { return m_It.move_previous(); }
 	
@@ -208,9 +210,9 @@ public:
 		m_Map->Changed(m_Map);
 		return true;
 		}
-	template <typename _value_param_t> inline VOID SetValue(_value_param_t&& Value)
+	inline VOID SetValue(_value_t const& Value)
 		{
-		m_It->set_value(std::forward<_value_param_t>(Value));
+		m_It->set_value(Value);
 		}
 
 private:
@@ -242,10 +244,10 @@ public:
 	inline BOOL HasCurrent()const { return m_It.has_current(); }
 
 	// Navigation
+	inline BOOL Begin() { return m_It.begin(); }
+	inline BOOL End() { return m_It.rbegin(); }
 	inline BOOL Find(_key_t const& Key, FindFunction Function=FindFunction::equal) { return m_It.find(Key, Function); }
-	inline BOOL First() { return m_It.begin(); }
 	inline _size_t GetPosition() { return m_It.get_position(); }
-	inline BOOL Last() { return m_It.rbegin(); }
 	inline BOOL MoveNext() { return m_It.move_next(); }
 	inline BOOL MovePrevious() { return m_It.move_previous(); }
 	

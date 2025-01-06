@@ -54,9 +54,21 @@ public:
 	// Access
 	inline Handle<Iterator> At(_size_t Position) { return new Iterator(this, Position); }
 	inline Handle<ConstIterator> AtConst(_size_t Position) { return new ConstIterator(this, Position); }
+	inline Handle<Iterator> Begin() { return new Iterator(this, 0); }
+	inline Handle<ConstIterator> BeginConst() { return new ConstIterator(this, 0); }
 	inline BOOL Contains(_item_t const& Item) { return m_List.contains(Item); }
-	inline Handle<Iterator> First() { return new Iterator(this, 0); }
-	inline Handle<ConstIterator> FirstConst() { return new ConstIterator(this, 0); }
+	inline Handle<Iterator> End()
+		{
+		auto it=new Iterator(this, -2);
+		it->End();
+		return it;
+		}
+	inline Handle<ConstIterator> EndConst()
+		{
+		auto it=new ConstIterator(this, -2);
+		it->End();
+		return it;
+		}
 	inline _item_t GetAt(_size_t Position)
 		{
 		_size_t count=m_List.get_count();
@@ -66,18 +78,6 @@ public:
 		}
 	inline _size_t GetCount() { return m_List.get_count(); }
 	inline BOOL IndexOf(_item_t const& Item, _size_t* Position) { return m_List.index_of(Item, Position); }
-	inline Handle<Iterator> Last()
-		{
-		auto it=new Iterator(this, -2);
-		it->Last();
-		return it;
-		}
-	inline Handle<ConstIterator> LastConst()
-		{
-		auto it=new ConstIterator(this, -2);
-		it->Last();
-		return it;
-		}
 
 	// Modification
 	BOOL Add(_item_t const& Item, BOOL Notify=true)
@@ -216,9 +216,9 @@ public:
 	BOOL HasCurrent()const { return m_It.has_current(); }
 
 	// Navigation
-	BOOL First() { return m_It.begin(); }
+	BOOL Begin() { return m_It.begin(); }
+	BOOL End() { return m_It.rbegin(); }
 	_size_t GetPosition() { return m_It.get_position(); }
-	BOOL Last() { return m_It.rbegin(); }
 	BOOL Move(BOOL Forward, BOOL Repeat)
 		{
 		if(Forward)
@@ -283,9 +283,9 @@ public:
 	BOOL HasCurrent()const { return m_It.has_current(); }
 
 	// Navigation
-	BOOL First() { return m_It.begin(); }
+	BOOL Begin() { return m_It.begin(); }
+	BOOL End() { return m_It.rbegin(); }
 	_size_t GetPosition() { return m_It.get_position(); }
-	BOOL Last() { return m_It.rbegin(); }
 	BOOL MoveNext() { return m_It.move_next(); }
 	BOOL MovePrevious() { return m_It.move_previous(); }
 

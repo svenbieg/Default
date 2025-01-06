@@ -19,12 +19,11 @@
 class Exception
 {
 public:
+	// Con-/Destructors
+	Exception(Status Status=Status::Error): m_Status(Status) {}
+
 	// Common
 	Status GetStatus()const { return m_Status; }
-
-protected:
-	// Con-/Destructors
-	Exception(Status Status): m_Status(Status) {}
 
 private:
 	// Common

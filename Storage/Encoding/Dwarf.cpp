@@ -136,7 +136,7 @@ do
 	}
 while(byte&0x80);
 if(byte&0x40)
-	value|=(-1ULL)<<shift;
+	value|=(UINT64_MAX)<<shift;
 return (INT64)value;
 }
 
@@ -175,7 +175,7 @@ return (UINT)size;
 
 UINT Dwarf::WriteUnsigned(OutputStream* dwarf, UINT64 value)
 {
-SIZE_T size=0;
+UINT size=0;
 do
 	{
 	BYTE byte=(BYTE)value&0x7F;
@@ -184,7 +184,7 @@ do
 		byte|=0x80;
 	if(dwarf)
 		{
-		size+=dwarf->Write(&byte, 1);
+		size+=(UINT)dwarf->Write(&byte, 1);
 		}
 	else
 		{

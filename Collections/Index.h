@@ -54,7 +54,22 @@ public:
 
 	// Access
 	inline Handle<Iterator> At(UINT Position) { return new Iterator(this, Position); }
+	inline Handle<ConstIterator> AtConst(UINT Position) { return new ConstIterator(this, Position); }
+	inline Handle<Iterator> Begin() { return new Iterator(this, 0); }
+	inline Handle<ConstIterator> BeginConst() { return new ConstIterator(this, 0); }
 	inline BOOL Contains(_id_t const& Id) { return m_Index.contains(Id); }
+	inline Handle<Iterator> End()
+		{
+		auto it=new Iterator(this, -2);
+		it->End();
+		return it;
+		}
+	inline Handle<ConstIterator> EndConst()
+		{
+		auto it=new ConstIterator(this, -2);
+		it->End();
+		return it;
+		}
 	inline Handle<Iterator> Find(_id_t const& Id, FindFunction Function=FindFunction::equal)
 		{
 		auto it=new Iterator(this, -2);
@@ -67,22 +82,8 @@ public:
 		it->Find(Id, Function);
 		return it;
 		}
-	inline Handle<Iterator> First() { return new Iterator(this, 0); }
-	inline Handle<ConstIterator> FirstConst() { return new ConstIterator(this, 0); }
 	inline _id_t GetAt(_size_t Position) { return m_Index.get_at(Position); }
 	inline _size_t GetCount() { return m_Index.get_count(); }
-	inline Handle<Iterator> Last()
-		{
-		auto it=new Iterator(this, -2);
-		it->Last();
-		return it;
-		}
-	inline Handle<ConstIterator> LastConst()
-		{
-		auto it=new ConstIterator(this, -2);
-		it->Last();
-		return it;
-		}
 
 	// Modification
 	BOOL Add(_id_t const& Id, BOOL Notify=true)
