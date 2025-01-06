@@ -34,7 +34,9 @@ typedef unsigned int UINT;
 constexpr UINT UINT_MAX=0xFFFFFFFF;
 
 typedef long long int INT64;
+
 typedef unsigned long long int UINT64;
+constexpr UINT64 UINT64_MAX=0xFFFFFFFFFFFFFFFFULL;
 
 typedef float FLOAT;
 typedef double DOUBLE;
