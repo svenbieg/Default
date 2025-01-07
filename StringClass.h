@@ -37,12 +37,7 @@ public:
 	static Handle<String> Create(UINT Length, LPCSTR Value);
 	static Handle<String> Create(UINT Length, LPCWSTR Value);
 	static Handle<String> Create(LPCSTR Format, VariableArguments const& Arguments);
-	template <class... _args_t> static Handle<String> Create(LPCSTR Format, _args_t... Arguments)
-		{
-		UnknownClass args[]={ Arguments... };
-		VariableArguments vargs(args, TypeHelper::ArraySize(args));
-		return Create(Format, vargs);
-		}
+	template <class... _args_t> static inline Handle<String> Create(LPCSTR Format, _args_t... Arguments);
 
 	// Access
 	inline LPCTSTR Begin()const { return m_Buffer; }
@@ -307,4 +302,21 @@ private:
 		auto str=String::Create(Value);
 		_base_t::Create(str);
 		}
+	inline VOID Create(LPCSTR Format, VariableArguments const& Arguments)
+		{
+		auto str=String::Create(Format, Arguments);
+		_base_t::Create(str);
+		}
 };
+
+
+//==================
+// Con-/Destructors
+//==================
+
+template <class... _args_t> inline Handle<String> String::Create(LPCSTR Format, _args_t... Arguments)
+{
+UnknownClass args[]={ Arguments... };
+VariableArguments vargs(args, TypeHelper::ArraySize(args));
+return Create(Format, vargs);
+}
