@@ -1422,6 +1422,11 @@ UINT StringHelper::Length(LPCWSTR str, UINT max)
 return StringLength(str, max);
 }
 
+UINT StringHelper::Length(LPCSTR format, VariableArguments const& args)
+{
+return PrintArgs((LPSTR)nullptr, 0, format, args);
+}
+
 UINT StringHelper::LowerCase(LPSTR dst, UINT size, LPCSTR str)
 {
 if(!str)
