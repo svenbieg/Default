@@ -5,7 +5,7 @@
 // Implementation of a sorted list
 // Items can be inserted, removed and looked-up in constant low time
 
-// Copyright 2025, Sven Bieg (svenbieg@web.de)
+// Copyright 2025, Sven Bieg (svenbieg@outlook.de)
 // http://github.com/svenbieg/Clusters
 
 
