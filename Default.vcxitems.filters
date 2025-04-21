@@ -41,9 +41,6 @@
       <Filter>Collections</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Status.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Volume.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\Stream.h">
       <Filter>Storage\Streams</Filter>
     </ClInclude>
@@ -106,6 +103,13 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Function.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StatusHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Culture\LanguageCode.h">
+      <Filter>Culture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)BitHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Volume.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
@@ -158,6 +162,9 @@
     </Filter>
     <Filter Include="Storage\Encoding">
       <UniqueIdentifier>{0839ad31-9b52-4a75-ae7b-3f6be2828f3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Culture">
+      <UniqueIdentifier>{9163acb5-c885-4791-b4c8-e49817220d0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

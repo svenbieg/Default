@@ -132,7 +132,7 @@ BYTE byte;
 do
 	{
 	byte=*dwarf++;
-	value|=((SIZE_T)byte&0x7F)<<shift;
+	value|=((UINT64)byte&0x7F)<<shift;
 	shift+=7;
 	}
 while(byte&0x80);
