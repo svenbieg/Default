@@ -26,7 +26,9 @@ public:
 	static VOID Copy(UINT* Destination, UINT* End, UINT const* Source);
 	static VOID Copy(UINT64* Destination, UINT64* End, UINT64 const* Source);
 	static VOID Fill(VOID* Destination, SIZE_T Size, BYTE Value);
-	static VOID Fill(SIZE_T* Destination, SIZE_T Count, SIZE_T Value);
-	static VOID Fill(SIZE_T* Destination, SIZE_T* End, SIZE_T Value);
+	static VOID Fill(UINT* Destination, SIZE_T Count, UINT Value);
+	static VOID Fill(UINT* Destination, UINT* End, UINT Value);
+	static VOID Fill(UINT64* Destination, SIZE_T Count, UINT64 Value);
+	static VOID Fill(UINT64* Destination, UINT64* End, UINT64 Value);
 	static VOID Move(VOID* Destination, VOID const* Source, SIZE_T Size);
 };

@@ -9,6 +9,8 @@
 // Register
 //==========
 
+typedef volatile BYTE REG8;
+typedef volatile WORD REG16;
 typedef volatile UINT REG;
 
 
@@ -62,6 +64,10 @@ public:
 	static inline UINT Get(volatile UINT64& Operand, UINT Mask)
 		{
 		return ((UINT)Operand)&Mask;
+		}
+	static inline UINT64 Get(volatile UINT64& Operand, UINT64 Mask)
+		{
+		return Operand&Mask;
 		}
 	static inline UINT Get(volatile UINT& Operand, BIT_FIELD const& BitHelper)
 		{
