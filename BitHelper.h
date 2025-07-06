@@ -5,26 +5,6 @@
 #pragma once
 
 
-//==========
-// Register
-//==========
-
-typedef volatile BYTE REG8;
-typedef volatile WORD REG16;
-typedef volatile UINT REG;
-
-
-//===========
-// Bit-Field
-//===========
-
-typedef struct
-{
-UINT Mask;
-UINT Shift;
-}BIT_FIELD;
-
-
 //============
 // Bit-Helper
 //============
@@ -69,10 +49,6 @@ public:
 		{
 		return Operand&Mask;
 		}
-	static inline UINT Get(volatile UINT& Operand, BIT_FIELD const& BitHelper)
-		{
-		return (Operand>>BitHelper.Shift)&BitHelper.Mask;
-		}
 	static inline VOID Set(volatile UINT& Operand, UINT Mask)
 		{
 		Operand|=Mask;
@@ -95,41 +71,8 @@ public:
 		value|=Value;
 		Operand=value;
 		}
-	static inline VOID Set(volatile WORD& Operand, BIT_FIELD const& BitHelper, WORD Value)
-		{
-		WORD value=Operand;
-		value&=~(BitHelper.Mask<<BitHelper.Shift);
-		value|=(Value<<BitHelper.Shift);
-		Operand=value;
-		}
-	static inline VOID Set(volatile UINT& Operand, BIT_FIELD const& BitHelper, UINT Value)
-		{
-		UINT value=Operand;
-		value&=~(BitHelper.Mask<<BitHelper.Shift);
-		value|=(Value<<BitHelper.Shift);
-		Operand=value;
-		}
-	static inline VOID Set(volatile UINT64& Operand, BIT_FIELD const& BitHelper, UINT64 Value)
-		{
-		UINT64 value=Operand;
-		value&=~((UINT64)BitHelper.Mask<<BitHelper.Shift);
-		value|=(Value<<BitHelper.Shift);
-		Operand=value;
-		}
 	static inline VOID Switch(volatile UINT& Operand, UINT Mask)
 		{
 		Operand^=Mask;
-		}
-	static inline VOID Write(volatile BYTE& Operand, BYTE Value)
-		{
-		Operand=Value;
-		}
-	static inline VOID Write(volatile WORD& Operand, WORD Value)
-		{
-		Operand=Value;
-		}
-	static inline VOID Write(volatile UINT& Operand, UINT Value)
-		{
-		Operand=Value;
 		}
 };

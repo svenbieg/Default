@@ -100,6 +100,7 @@ public:
 		return value;
 		}
 	VOID SetPosition(SIZE_T Position) { m_Buffer=(BYTE*)Position; }
+	static UINT WriteSigned(OutputStream* Dwarf, INT64 Value);
 	static UINT WriteUnsigned(OutputStream* Dwarf, UINT64 Value);
 
 private:
