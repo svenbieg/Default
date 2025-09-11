@@ -11,12 +11,25 @@
 
 #include "Storage/StringBuffer.h"
 
+using namespace Storage::Streams;
+
 
 //===========
 // Namespace
 //===========
 
 namespace Storage {
+
+
+//==========
+// Settings
+//==========
+
+#ifdef _UNICODE
+constexpr StreamFormat StringStreamFormat=StreamFormat::Unicode;
+#else
+constexpr StreamFormat StringStreamFormat=StreamFormat::Ansi;
+#endif
 
 
 //==============
@@ -40,6 +53,7 @@ return copy;
 //==========================
 
 StringBuffer::StringBuffer(Handle<String> value):
+Stream(StringStreamFormat),
 m_Position(0),
 m_Size(0),
 m_Value(value)
