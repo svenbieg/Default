@@ -25,21 +25,6 @@ using FormatFlags=StringHelper::FormatFlags;
 // Forward-Declarations
 //======================
 
-template <class _dst_t, class _src_t> inline _dst_t CharToChar(_src_t Char)
-{
-return (_dst_t)Char;
-}
-
-template <CHAR, WCHAR> inline CHAR CharToChar(WCHAR Char)
-{
-return CharHelper::ToAnsi(Char);
-}
-
-template <WCHAR, CHAR> inline WCHAR CharToChar(CHAR Char)
-{
-return CharHelper::ToUnicode(Char);
-}
-
 template <class _char_t> inline UINT StringLength(_char_t const* value)
 {
 if(!value)
@@ -88,7 +73,7 @@ for(; pos<end; pos++)
 	if(src[pos]==0)
 		break;
 	if(dst)
-		dst[pos]=CharToChar<_dst_t, _src_t>(src[pos]);
+		dst[pos]=CharHelper::ToChar<_dst_t>(src[pos]);
 	}
 if(dst)
 	dst[pos]=0;
@@ -153,6 +138,16 @@ for(; str[pos]; pos++)
 if(pos_ptr)
 	*pos_ptr=pos;
 return false;
+}
+
+template <class _char_t> inline UINT StringLowercase(_char_t* str)
+{
+if(!str)
+	return 0;
+UINT pos=0;
+for(; str[pos]; pos++)
+	str[pos]=CharHelper::ToSmall<_char_t>(str[pos]);
+return pos;
 }
 
 template <class _dst_t, class _char_t, class _find_t, class _insert_t> inline UINT StringReplace(_dst_t* dst, UINT size, _char_t const* str, _find_t const* find, _insert_t const* insert, BOOL cs, BOOL repeat)
@@ -220,6 +215,16 @@ while(*str)
 	str++;
 	}
 return str;
+}
+
+template <class _char_t> inline UINT StringUppercase(_char_t* str)
+{
+if(!str)
+	return 0;
+UINT pos=0;
+for(; str[pos]; pos++)
+	str[pos]=CharHelper::ToCapital<_char_t>(str[pos]);
+return pos;
 }
 
 
@@ -373,7 +378,7 @@ for(; str[pos]; pos++)
 	if(CharHelper::Equal(str[pos], stop))
 		break;
 	if(pos<size)
-		buf[pos]=CharToChar<_buf_t, _char_t>(str[pos]);
+		buf[pos]=CharHelper::ToChar<_buf_t>(str[pos]);
 	}
 if(pos<size)
 	buf[pos]=0;
@@ -385,17 +390,38 @@ return pos;
 // Printing
 //==========
 
-template <class _buf_t, class _char_t> UINT StringPrintChar(_buf_t* buf, UINT size, _char_t c, UINT pos=0)
+template <class _buf_t, class _char_t> UINT StringPrintChar(_buf_t* buf, UINT size, _char_t c, UINT pos)
 {
 if(!buf)
 	return 1;
 if(pos>=size)
 	return 0;
-buf[pos]=CharToChar<_buf_t, _char_t>(c);
+buf[pos]=CharHelper::ToChar<_buf_t>(c);
 return 1;
 }
 
-template <class _buf_t, class _char_t> UINT StringPrintChars(_buf_t* buf, UINT size, _char_t c, UINT count, UINT pos=0)
+template <class _buf_t, class _char_t> UINT StringPrintChar(_buf_t* buf, UINT size, _char_t c, FormatFlags flags, UINT pos)
+{
+if(!buf)
+	return 1;
+if(pos>=size)
+	return 0;
+if(FlagHelper::Get(flags, FormatFlags::High))
+	{
+	buf[pos]=CharHelper::ToCapital<_buf_t>(c);
+	}
+else if(FlagHelper::Get(flags, FormatFlags::Low))
+	{
+	buf[pos]=CharHelper::ToSmall<_buf_t>(c);
+	}
+else
+	{
+	buf[pos]=CharHelper::ToChar<_buf_t>(c);
+	}
+return 1;
+}
+
+template <class _buf_t, class _char_t> UINT StringPrintChars(_buf_t* buf, UINT size, _char_t c, UINT count, UINT pos)
 {
 if(!buf)
 	return count;
@@ -403,11 +429,11 @@ if(pos>=size)
 	return 0;
 UINT print=TypeHelper::Min(size-pos, count);
 for(UINT u=0; u<print; u++)
-	buf[pos++]=CharToChar<_buf_t, _char_t>(c);
+	buf[pos++]=CharHelper::ToChar<_buf_t>(c);
 return print;
 }
 
-template <class _buf_t, class _char_t> UINT StringPrintString(_buf_t* buf, UINT size, _char_t const* value, UINT pos=0)
+template <class _buf_t, class _char_t> UINT StringPrintString(_buf_t* buf, UINT size, _char_t const* value, UINT pos)
 {
 if(!value)
 	return 0;
@@ -417,12 +443,42 @@ for(; value[value_pos]; value_pos++)
 	if(pos+1==size)
 		break;
 	if(buf)
-		buf[pos++]=CharToChar<_buf_t, _char_t>(value[value_pos]);
+		buf[pos++]=CharHelper::ToChar<_buf_t>(value[value_pos]);
 	}
 return value_pos;
 }
 
-template <class _buf_t, class _char_t> UINT StringPrintString(_buf_t* buf, UINT size, _char_t const* value, FormatFlags flags, UINT width, UINT pos=0)
+template <class _buf_t, class _char_t> UINT StringPrintStringCapital(_buf_t* buf, UINT size, _char_t const* value, UINT pos)
+{
+if(!value)
+	return 0;
+UINT value_pos=0;
+for(; value[value_pos]; value_pos++)
+	{
+	if(pos+1==size)
+		break;
+	if(buf)
+		buf[pos++]=CharHelper::ToCapital<_buf_t>(value[value_pos]);
+	}
+return value_pos;
+}
+
+template <class _buf_t, class _char_t> UINT StringPrintStringSmall(_buf_t* buf, UINT size, _char_t const* value, UINT pos)
+{
+if(!value)
+	return 0;
+UINT value_pos=0;
+for(; value[value_pos]; value_pos++)
+	{
+	if(pos+1==size)
+		break;
+	if(buf)
+		buf[pos++]=CharHelper::ToSmall<_buf_t>(value[value_pos]);
+	}
+return value_pos;
+}
+
+template <class _buf_t, class _char_t> UINT StringPrintString(_buf_t* buf, UINT size, _char_t const* value, FormatFlags flags, UINT width, UINT pos)
 {
 if(!value)
 	return 0;
@@ -435,7 +491,18 @@ if(len<width)
 	if(!FlagHelper::Get(flags, FormatFlags::Left))
 		pos+=StringPrintChars(buf, size, ' ', width-len, pos);
 	}
-pos+=StringPrintString(buf, size, value, pos);
+if(FlagHelper::Get(flags, FormatFlags::High))
+	{
+	pos+=StringPrintStringCapital(buf, size, value, pos);
+	}
+else if(FlagHelper::Get(flags, FormatFlags::Low))
+	{
+	pos+=StringPrintStringSmall(buf, size, value, pos);
+	}
+else
+	{
+	pos+=StringPrintString(buf, size, value, pos);
+	}
 if(len<width)
 	{
 	if(FlagHelper::Get(flags, FormatFlags::Left))
@@ -828,7 +895,7 @@ for(UINT fmt=0; format[fmt]; )
 			WCHAR c=' ';
 			if(!args.GetAt(arg++, c))
 				return 0;
-			pos+=StringPrintChar(str, size, c, pos);
+			pos+=StringPrintChar(str, size, c, flags, pos);
 			continue;
 			}
 		case Format::String:
@@ -900,7 +967,7 @@ for(UINT fmt=0; format[fmt]; )
 			CHAR* pc=nullptr;
 			if(args.GetAt(arg, pc))
 				{
-				*pc=CharToChar<CHAR, _char_t>(tc);
+				*pc=CharHelper::ToAnsi(tc);
 				arg++;
 				read++;
 				pos++;
@@ -909,7 +976,7 @@ for(UINT fmt=0; format[fmt]; )
 			WCHAR* pwc=nullptr;
 			if(args.GetAt(arg, pwc))
 				{
-				*pwc=CharToChar<WCHAR, _char_t>(tc);
+				*pwc=CharHelper::ToUnicode(tc);
 				arg++;
 				read++;
 				pos++;
@@ -1225,7 +1292,7 @@ if(!str)
 UINT pos=0;
 UINT len=0;
 while(str[len])
-	key[pos++%ENCRYPT_BLOCK]^=ENCRYPT_FWD[str[len++]];
+	key[pos++%ENCRYPT_BLOCK]^=ENCRYPT_FWD[(SIZE_T)str[len++]];
 while(pos<ENCRYPT_BLOCK)
 	key[pos++]=ENCRYPT_FWD[key[pos-len]];
 }
@@ -1475,23 +1542,23 @@ if(CharHelper::Equal(str[1], '%'))
 UINT pos=1;
 for(; str[pos]; pos++)
 	{
-	if(CharHelper::Compare(str[pos], ' ')==0)
+	if(CharHelper::Equal(str[pos], ' '))
 		{
 		FlagHelper::Set(flags, FormatFlags::Space);
 		}
-	else if(CharHelper::Compare(str[pos], '+')==0)
+	else if(CharHelper::Equal(str[pos], '+'))
 		{
 		FlagHelper::Set(flags, FormatFlags::Signed);
 		}
-	else if(CharHelper::Compare(str[pos], '-')==0)
+	else if(CharHelper::Equal(str[pos], '-'))
 		{
 		FlagHelper::Set(flags, FormatFlags::Left);
 		}
-	else if(CharHelper::Compare(str[pos], '#')==0)
+	else if(CharHelper::Equal(str[pos], '#'))
 		{
 		FlagHelper::Set(flags, FormatFlags::Numeric);
 		}
-	else if(CharHelper::Compare(str[pos], '0')==0)
+	else if(CharHelper::Equal(str[pos], '0'))
 		{
 		if(FlagHelper::Get(flags, FormatFlags::Zero))
 			break;
@@ -1530,13 +1597,15 @@ if(CharHelper::Equal(str[pos], '.'))
 		}
 	}
 // Size
-for(; str[pos]; pos++)
+if(CharHelper::Equal(str[pos], 'h'))
 	{
-	if(CharHelper::Equal(str[pos], 'h'))
-		continue;
-	else if(CharHelper::Equal(str[pos], 'l'))
-		continue;
-	break;
+	FlagHelper::Set(flags, FormatFlags::High);
+	pos++;
+	}
+else if(CharHelper::Equal(str[pos], 'l'))
+	{
+	FlagHelper::Set(flags, FormatFlags::Low);
+	pos++;
 	}
 // Type
 CHAR type=str[pos];
@@ -1549,6 +1618,12 @@ switch(type)
 	{
 	case 'c':
 		{
+		format=Format::Char;
+		break;
+		}
+	case 'C':
+		{
+		FlagHelper::Set(flags, FormatFlags::High);
 		format=Format::Char;
 		break;
 		}
@@ -1569,6 +1644,12 @@ switch(type)
 		}
 	case 's':
 		{
+		format=Format::String;
+		break;
+		}
+	case 'S':
+		{
+		FlagHelper::Set(flags, FormatFlags::High);
 		format=Format::String;
 		break;
 		}
@@ -1645,7 +1726,17 @@ UINT StringHelper::Length(LPCSTR format, VariableArguments const& args)
 return PrintArgs((LPSTR)nullptr, 0, format, args);
 }
 
-UINT StringHelper::LowerCase(LPSTR dst, UINT size, LPCSTR str)
+UINT StringHelper::Lowercase(LPSTR str)
+{
+return StringLowercase(str);
+}
+
+UINT StringHelper::Lowercase(LPWSTR str)
+{
+return StringLowercase(str);
+}
+
+UINT StringHelper::Lowercase(LPSTR dst, UINT size, LPCSTR str)
 {
 if(!str)
 	return 0;
@@ -1655,7 +1746,7 @@ for(; str[pos]; pos++)
 	if(pos+1==size)
 		break;
 	if(dst)
-		dst[pos]=CharHelper::ToSmall(str[pos]);
+		dst[pos]=CharHelper::ToSmallAnsi(str[pos]);
 	}
 if(dst)
 	dst[pos]=0;
@@ -1812,7 +1903,17 @@ LPCWSTR StringHelper::Truncate(LPCWSTR str, LPCSTR chars)
 return StringTruncate(str, chars);
 }
 
-UINT StringHelper::UpperCase(LPSTR dst, UINT size, LPCSTR str)
+UINT StringHelper::Uppercase(LPSTR str)
+{
+return StringUppercase(str);
+}
+
+UINT StringHelper::Uppercase(LPWSTR str)
+{
+return StringUppercase(str);
+}
+
+UINT StringHelper::Uppercase(LPSTR dst, UINT size, LPCSTR str)
 {
 if(!str)
 	return 0;
@@ -1822,7 +1923,7 @@ for(; str[pos]; pos++)
 	if(pos+1==size)
 		break;
 	if(dst)
-		dst[pos]=CharHelper::ToCapital(str[pos]);
+		dst[pos]=CharHelper::ToCapitalAnsi(str[pos]);
 	}
 if(dst)
 	dst[pos]=0;

@@ -117,23 +117,34 @@ public:
 	static UINT ReadUtf8(InputStream* Stream, CHAR* Char);
 	static UINT ReadUtf8(InputStream* Stream, WCHAR* Char);
 	static CHAR ToAnsi(WCHAR Char);
-	static CHAR ToCapital(CHAR Char);
-	static WCHAR ToCapital(WCHAR Char);
+	template<class _dst_t> static _dst_t ToCapital(CHAR Char) {}
+	template<> static inline CHAR ToCapital(CHAR Char) { return ToCapitalAnsi(Char); }
+	template<> static inline WCHAR ToCapital(CHAR Char) { return ToCapitalUnicode(Char); }
+	template<class _dst_t> static _dst_t ToCapital(WCHAR Char) {}
+	template<> static inline CHAR ToCapital(WCHAR Char) { return ToCapitalAnsi(Char); }
+	template<> static inline WCHAR ToCapital(WCHAR Char) { return ToCapitalUnicode(Char); }
 	static CHAR ToCapitalAnsi(CHAR Char);
 	static CHAR ToCapitalAnsi(WCHAR Char);
 	static WCHAR ToCapitalUnicode(CHAR Char);
 	static WCHAR ToCapitalUnicode(WCHAR Char);
-	#ifdef _UNICODE
-	static inline TCHAR ToChar(CHAR Char) { return ToUnicode(Char); }
-	static inline TCHAR ToChar(WCHAR Char) { return Char; }
-	#else
-	static inline TCHAR ToChar(CHAR Char) { return Char; }
-	static inline TCHAR ToChar(WCHAR Char) { return ToAnsi(Char); }
-	#endif
+	template<class _dst_t> static _dst_t ToChar(CHAR Char) {}
+	template<> static inline CHAR ToChar(CHAR Char) { return Char; }
+	template<> static inline WCHAR ToChar(CHAR Char) { return ToUnicode(Char); }
+	template<class _dst_t> static _dst_t ToChar(WCHAR Char) {}
+	template<> static inline CHAR ToChar(WCHAR Char) { return ToAnsi(Char); }
+	template<> static inline WCHAR ToChar(WCHAR Char) { return Char; }
 	static BOOL ToDigit(CHAR Char, UINT* Digit, UINT Base=10);
 	static BOOL ToDigit(WCHAR Char, UINT* Digit, UINT Base=10);
-	static CHAR ToSmall(CHAR Char);
-	static WCHAR ToSmall(WCHAR Char);
+	template<class _dst_t> static _dst_t ToSmall(CHAR Char) {}
+	template<> static inline CHAR ToSmall(CHAR Char) { return ToSmallAnsi(Char); }
+	template<> static inline WCHAR ToSmall(CHAR Char) { return ToSmallUnicode(Char); }
+	template<class _dst_t> static _dst_t ToSmall(WCHAR Char) {}
+	template<> static inline CHAR ToSmall(WCHAR Char) { return ToSmallAnsi(Char); }
+	template<> static inline WCHAR ToSmall(WCHAR Char) { return ToSmallUnicode(Char); }
+	static CHAR ToSmallAnsi(CHAR Char);
+	static CHAR ToSmallAnsi(WCHAR Char);
+	static WCHAR ToSmallUnicode(CHAR Char);
+	static WCHAR ToSmallUnicode(WCHAR Char);
 	static WCHAR ToUnicode(CHAR Char);
 	static UINT WriteAnsi(OutputStream* Stream, CHAR Char);
 	static UINT WriteAnsi(OutputStream* Stream, WCHAR Char);

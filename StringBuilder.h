@@ -37,7 +37,7 @@ private:
 		{
 		if(m_Position==m_Size)
 			return 0;
-		m_Buffer[m_Position++]=CharHelper::ToChar(Char);
+		m_Buffer[m_Position++]=CharHelper::ToChar<TCHAR>(Char);
 		return 1;
 		}
 	template <class _char_t> UINT AppendString(UINT Length, _char_t const* String)

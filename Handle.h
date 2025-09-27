@@ -94,7 +94,7 @@ private:
 		{
 		auto init=static_cast<_create_t*>(Init);
 		if(init)
-			init->Refer();
+			init->AddReference();
 		*Create=init;
 		}
 	template <class _set_t, class _convert_t> static VOID Set(_set_t** Set, _convert_t* To)
@@ -106,7 +106,7 @@ private:
 		if(obj)
 			obj->Release();
 		if(To)
-			To->Refer();
+			To->AddReference();
 		}
 	_obj_t* m_Object;
 };

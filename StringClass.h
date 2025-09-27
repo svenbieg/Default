@@ -85,7 +85,9 @@ public:
 		VariableArguments vargs(args, TypeHelper::ArraySize(args));
 		return StringHelper::ScanArgs(m_Buffer, Format, vargs);
 		}
+	Handle<String> ToLowercase();
 	Handle<String> ToString(LanguageCode Language=LanguageCode::None)override;
+	Handle<String> ToUppercase();
 
 	// Comparison
 	inline INT Compare(String* String) { return Compare(this, String); }
