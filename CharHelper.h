@@ -117,30 +117,18 @@ public:
 	static UINT ReadUtf8(InputStream* Stream, CHAR* Char);
 	static UINT ReadUtf8(InputStream* Stream, WCHAR* Char);
 	static CHAR ToAnsi(WCHAR Char);
-	template<class _dst_t> static _dst_t ToCapital(CHAR Char) {}
-	template<> static inline CHAR ToCapital(CHAR Char) { return ToCapitalAnsi(Char); }
-	template<> static inline WCHAR ToCapital(CHAR Char) { return ToCapitalUnicode(Char); }
-	template<class _dst_t> static _dst_t ToCapital(WCHAR Char) {}
-	template<> static inline CHAR ToCapital(WCHAR Char) { return ToCapitalAnsi(Char); }
-	template<> static inline WCHAR ToCapital(WCHAR Char) { return ToCapitalUnicode(Char); }
+	static TCHAR ToCapital(CHAR Char);
+	static TCHAR ToCapital(WCHAR Char);
 	static CHAR ToCapitalAnsi(CHAR Char);
 	static CHAR ToCapitalAnsi(WCHAR Char);
 	static WCHAR ToCapitalUnicode(CHAR Char);
 	static WCHAR ToCapitalUnicode(WCHAR Char);
-	template<class _dst_t> static _dst_t ToChar(CHAR Char) {}
-	template<> static inline CHAR ToChar(CHAR Char) { return Char; }
-	template<> static inline WCHAR ToChar(CHAR Char) { return ToUnicode(Char); }
-	template<class _dst_t> static _dst_t ToChar(WCHAR Char) {}
-	template<> static inline CHAR ToChar(WCHAR Char) { return ToAnsi(Char); }
-	template<> static inline WCHAR ToChar(WCHAR Char) { return Char; }
+	static TCHAR ToChar(CHAR Char);
+	static TCHAR ToChar(WCHAR Char);
 	static BOOL ToDigit(CHAR Char, UINT* Digit, UINT Base=10);
 	static BOOL ToDigit(WCHAR Char, UINT* Digit, UINT Base=10);
-	template<class _dst_t> static _dst_t ToSmall(CHAR Char) {}
-	template<> static inline CHAR ToSmall(CHAR Char) { return ToSmallAnsi(Char); }
-	template<> static inline WCHAR ToSmall(CHAR Char) { return ToSmallUnicode(Char); }
-	template<class _dst_t> static _dst_t ToSmall(WCHAR Char) {}
-	template<> static inline CHAR ToSmall(WCHAR Char) { return ToSmallAnsi(Char); }
-	template<> static inline WCHAR ToSmall(WCHAR Char) { return ToSmallUnicode(Char); }
+	static TCHAR ToSmall(CHAR Char);
+	static TCHAR ToSmall(WCHAR Char);
 	static CHAR ToSmallAnsi(CHAR Char);
 	static CHAR ToSmallAnsi(WCHAR Char);
 	static WCHAR ToSmallUnicode(CHAR Char);

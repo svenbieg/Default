@@ -9,7 +9,7 @@
 // Using
 //=======
 
-#include "Storage/Intermediate.h"
+#include "Storage/pbuf.hpp"
 
 
 //================
@@ -19,9 +19,6 @@
 class StringBuilder
 {
 public:
-	// Using
-	using Intermediate=Storage::Intermediate;
-
 	// Con-/Destructors
 	StringBuilder();
 	StringBuilder(UINT Length);
@@ -52,7 +49,7 @@ private:
 	Handle<String> StringToString();
 	APPEND_ANSI m_AppendAnsi;
 	APPEND_UNICODE m_AppendUnicode;
-	Handle<Intermediate> m_Buffer;
+	Storage::pbuf<64> m_Buffer;
 	INITIALIZE m_Initialize;
 	UINT m_Position;
 	UINT m_Size;

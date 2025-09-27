@@ -25,6 +25,65 @@ using FormatFlags=StringHelper::FormatFlags;
 // Forward-Declarations
 //======================
 
+template <class _dst_t, class _src_t> inline _dst_t CharToCapital(_src_t c) {}
+
+template <> inline CHAR CharToCapital(CHAR c)
+{
+return CharHelper::ToCapitalAnsi(c);
+}
+
+template <> inline CHAR CharToCapital(WCHAR c)
+{
+return CharHelper::ToCapitalAnsi(c);
+}
+
+template <> inline WCHAR CharToCapital(CHAR c)
+{
+return CharHelper::ToCapitalUnicode(c);
+}
+
+template <> inline WCHAR CharToCapital(WCHAR c)
+{
+return CharHelper::ToCapitalUnicode(c);
+}
+
+template <class _dst_t, class _src_t> inline _dst_t CharToChar(_src_t c)
+{
+return c;
+}
+
+template <> inline CHAR CharToChar(WCHAR c)
+{
+return CharHelper::ToAnsi(c);
+}
+
+template <> inline WCHAR CharToChar(CHAR c)
+{
+return CharHelper::ToUnicode(c);
+}
+
+template <class _dst_t, class _src_t> inline _dst_t CharToSmall(_src_t c) {}
+
+template <> inline CHAR CharToSmall(CHAR c)
+{
+return CharHelper::ToSmallAnsi(c);
+}
+
+template <> inline CHAR CharToSmall(WCHAR c)
+{
+return CharHelper::ToSmallAnsi(c);
+}
+
+template <> inline WCHAR CharToSmall(CHAR c)
+{
+return CharHelper::ToSmallUnicode(c);
+}
+
+template <> inline WCHAR CharToSmall(WCHAR c)
+{
+return CharHelper::ToSmallUnicode(c);
+}
+
 template <class _char_t> inline UINT StringLength(_char_t const* value)
 {
 if(!value)
@@ -73,7 +132,7 @@ for(; pos<end; pos++)
 	if(src[pos]==0)
 		break;
 	if(dst)
-		dst[pos]=CharHelper::ToChar<_dst_t>(src[pos]);
+		dst[pos]=CharToChar<_dst_t, _src_t>(src[pos]);
 	}
 if(dst)
 	dst[pos]=0;
@@ -146,7 +205,7 @@ if(!str)
 	return 0;
 UINT pos=0;
 for(; str[pos]; pos++)
-	str[pos]=CharHelper::ToSmall<_char_t>(str[pos]);
+	str[pos]=CharToSmall<_char_t, _char_t>(str[pos]);
 return pos;
 }
 
@@ -223,7 +282,7 @@ if(!str)
 	return 0;
 UINT pos=0;
 for(; str[pos]; pos++)
-	str[pos]=CharHelper::ToCapital<_char_t>(str[pos]);
+	str[pos]=CharToCapital<_char_t, _char_t>(str[pos]);
 return pos;
 }
 
@@ -378,7 +437,7 @@ for(; str[pos]; pos++)
 	if(CharHelper::Equal(str[pos], stop))
 		break;
 	if(pos<size)
-		buf[pos]=CharHelper::ToChar<_buf_t>(str[pos]);
+		buf[pos]=CharToChar<_buf_t, _char_t>(str[pos]);
 	}
 if(pos<size)
 	buf[pos]=0;
@@ -396,7 +455,7 @@ if(!buf)
 	return 1;
 if(pos>=size)
 	return 0;
-buf[pos]=CharHelper::ToChar<_buf_t>(c);
+buf[pos]=CharToChar<_buf_t, _char_t>(c);
 return 1;
 }
 
@@ -408,15 +467,15 @@ if(pos>=size)
 	return 0;
 if(FlagHelper::Get(flags, FormatFlags::High))
 	{
-	buf[pos]=CharHelper::ToCapital<_buf_t>(c);
+	buf[pos]=CharToCapital<_buf_t, _char_t>(c);
 	}
 else if(FlagHelper::Get(flags, FormatFlags::Low))
 	{
-	buf[pos]=CharHelper::ToSmall<_buf_t>(c);
+	buf[pos]=CharToSmall<_buf_t, _char_t>(c);
 	}
 else
 	{
-	buf[pos]=CharHelper::ToChar<_buf_t>(c);
+	buf[pos]=CharToChar<_buf_t, _char_t>(c);
 	}
 return 1;
 }
@@ -429,7 +488,7 @@ if(pos>=size)
 	return 0;
 UINT print=TypeHelper::Min(size-pos, count);
 for(UINT u=0; u<print; u++)
-	buf[pos++]=CharHelper::ToChar<_buf_t>(c);
+	buf[pos++]=CharToChar<_buf_t, _char_t>(c);
 return print;
 }
 
@@ -443,7 +502,7 @@ for(; value[value_pos]; value_pos++)
 	if(pos+1==size)
 		break;
 	if(buf)
-		buf[pos++]=CharHelper::ToChar<_buf_t>(value[value_pos]);
+		buf[pos++]=CharToChar<_buf_t, _char_t>(value[value_pos]);
 	}
 return value_pos;
 }
@@ -458,7 +517,7 @@ for(; value[value_pos]; value_pos++)
 	if(pos+1==size)
 		break;
 	if(buf)
-		buf[pos++]=CharHelper::ToCapital<_buf_t>(value[value_pos]);
+		buf[pos++]=CharToCapital<_buf_t, _char_t>(value[value_pos]);
 	}
 return value_pos;
 }
@@ -473,7 +532,7 @@ for(; value[value_pos]; value_pos++)
 	if(pos+1==size)
 		break;
 	if(buf)
-		buf[pos++]=CharHelper::ToSmall<_buf_t>(value[value_pos]);
+		buf[pos++]=CharToSmall<_buf_t, _char_t>(value[value_pos]);
 	}
 return value_pos;
 }

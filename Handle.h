@@ -9,6 +9,7 @@
 // Using
 //=======
 
+#include "Exception.h"
 #include "Object.h"
 
 
@@ -39,7 +40,7 @@ public:
 	// Access
 	inline operator BOOL()const { return m_Object!=nullptr; }
 	inline operator _obj_t*()const { return m_Object; }
-	inline _obj_t* operator->()const { return m_Object; }
+	inline _obj_t* operator->()const { return Get(m_Object); }
 	template <class _convert_t> inline Handle<_convert_t> As() { return dynamic_cast<_convert_t*>(m_Object); }
 
 	// Comparison
@@ -96,6 +97,12 @@ private:
 		if(init)
 			init->AddReference();
 		*Create=init;
+		}
+	template <class _get_t> static inline _get_t* Get(_get_t* Get)
+		{
+		if(!Get)
+			throw NullPointerException();
+		return Get;
 		}
 	template <class _set_t, class _convert_t> static VOID Set(_set_t** Set, _convert_t* To)
 		{

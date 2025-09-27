@@ -110,40 +110,34 @@ return (this->*m_ToString)();
 
 UINT StringBuilder::BufferAppendAnsi(CHAR c)
 {
-TCHAR tc=CharHelper::ToChar<TCHAR>(c);
-if(m_Buffer->Write(&tc, sizeof(TCHAR))!=sizeof(TCHAR))
-	throw OutOfMemoryException();
-m_Position++;
+TCHAR tc=CharHelper::ToChar(c);
+m_Buffer.write(&tc, sizeof(TCHAR));
 return 1;
 }
 
 UINT StringBuilder::BufferAppendUnicode(WCHAR c)
 {
-TCHAR tc=CharHelper::ToChar<TCHAR>(c);
-if(m_Buffer->Write(&tc, sizeof(TCHAR))!=sizeof(TCHAR))
-	throw OutOfMemoryException();
-m_Position++;
+TCHAR tc=CharHelper::ToChar(c);
+m_Buffer.write(&tc, sizeof(TCHAR));
 return 1;
 }
 
 VOID StringBuilder::BufferInitialize()
 {
-if(!m_Buffer)
-	m_Buffer=Intermediate::Create(64);
 }
 
 Handle<String> StringBuilder::BufferToString()
 {
-if(!m_Buffer)
+m_Buffer.flush();
+UINT len=m_Buffer.available()/sizeof(TCHAR);
+if(len==0)
 	return nullptr;
-auto str=String::Create(m_Position, nullptr);
+auto str=String::Create(len, nullptr);
 auto buf=const_cast<LPTSTR>(str->Begin());
-m_Buffer->Read(buf, m_Position*sizeof(TCHAR));
-buf[m_Position]=0;
+m_Buffer.read(buf, len*sizeof(TCHAR));
+buf[len]=0;
 str->m_Hash=StringHelper::GetHash(buf);
-str->m_Length=m_Position;
-m_Buffer->Clear();
-m_Position=0;
+str->m_Length=len;
 return str;
 }
 
@@ -152,7 +146,7 @@ UINT StringBuilder::StringAppendAnsi(CHAR c)
 if(m_Position+1>=m_Size)
 	throw BufferOverrunException();
 auto buf=const_cast<LPTSTR>(m_String->Begin());
-buf[m_Position++]=CharHelper::ToChar<TCHAR>(c);
+buf[m_Position++]=CharHelper::ToChar(c);
 return 1;
 }
 
@@ -161,7 +155,7 @@ UINT StringBuilder::StringAppendUnicode(WCHAR c)
 if(m_Position+1>=m_Size)
 	throw BufferOverrunException();
 auto buf=const_cast<LPTSTR>(m_String->Begin());
-buf[m_Position++]=CharHelper::ToChar<TCHAR>(c);
+buf[m_Position++]=CharHelper::ToChar(c);
 return 1;
 }
 

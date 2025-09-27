@@ -581,6 +581,16 @@ for(UINT u=0; u<128; u++)
 return '_';
 }
 
+TCHAR CharHelper::ToCapital(CHAR c)
+{
+return CharToCapital<TCHAR, CHAR>(c);
+}
+
+TCHAR CharHelper::ToCapital(WCHAR c)
+{
+return CharToCapital<TCHAR, WCHAR>(c);
+}
+
 CHAR CharHelper::ToCapitalAnsi(CHAR c)
 {
 return CharToCapital<CHAR, CHAR>(c);
@@ -601,6 +611,16 @@ WCHAR CharHelper::ToCapitalUnicode(WCHAR c)
 return CharToCapital<WCHAR, WCHAR>(c);
 }
 
+TCHAR CharHelper::ToChar(CHAR c)
+{
+return CharToChar<TCHAR, CHAR>(c);
+}
+
+TCHAR CharHelper::ToChar(WCHAR c)
+{
+return CharToChar<TCHAR, WCHAR>(c);
+}
+
 BOOL CharHelper::ToDigit(CHAR c, UINT* digit_ptr, UINT base)
 {
 return CharToDigit(c, digit_ptr, base);
@@ -609,6 +629,16 @@ return CharToDigit(c, digit_ptr, base);
 BOOL CharHelper::ToDigit(WCHAR c, UINT* digit_ptr, UINT base)
 {
 return CharToDigit(c, digit_ptr, base);
+}
+
+TCHAR CharHelper::ToSmall(CHAR c)
+{
+return CharToSmall<TCHAR, CHAR>(c);
+}
+
+TCHAR CharHelper::ToSmall(WCHAR c)
+{
+return CharToSmall<TCHAR, WCHAR>(c);
 }
 
 CHAR CharHelper::ToSmallAnsi(CHAR c)

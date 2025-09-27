@@ -1,5 +1,5 @@
 //================
-// Intermediate.h
+// PacketBuffer.h
 //================
 
 #pragma once
@@ -9,7 +9,6 @@
 // Using
 //=======
 
-#include "Concurrency/Task.h"
 #include "Storage/Streams/RandomAccessStream.h"
 #include "Storage/pbuf.hpp"
 
@@ -21,16 +20,16 @@
 namespace Storage {
 
 
-//==============
-// Intermediate
-//==============
+//===============
+// Packet-Buffer
+//===============
 
-class Intermediate: public Streams::RandomAccessStream
+class PacketBuffer: public Streams::RandomAccessStream
 {
 public:
 	// Con-/Destructors
-	inline ~Intermediate() { Clear(); }
-	static inline Handle<Intermediate> Create() { return new Intermediate(); }
+	~PacketBuffer();
+	static inline Handle<PacketBuffer> Create() { return new PacketBuffer(); }
 
 	// Common
 	VOID Clear();
@@ -45,12 +44,10 @@ public:
 
 private:
 	// Con-/Destructors
-	Intermediate() {}
+	PacketBuffer() {}
 
 	// Common
 	pbuf<PAGE_SIZE> m_Buffer;
-	Concurrency::Mutex m_Mutex;
-	Concurrency::Signal m_Signal;
 };
 
 }

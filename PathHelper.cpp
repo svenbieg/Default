@@ -120,7 +120,6 @@ for(UINT pos=len-1; pos>0; pos--)
 return String::Create(path);
 }
 
-
 //========
 // Common
 //========
