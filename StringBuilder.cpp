@@ -16,13 +16,25 @@
 // Con-/Destructors
 //==================
 
-StringBuilder::StringBuilder(UINT len):
-m_Buffer(nullptr),
+StringBuilder::StringBuilder():
+m_AppendAnsi(&StringBuilder::BufferAppendAnsi),
+m_AppendUnicode(&StringBuilder::BufferAppendUnicode),
+m_Initialize(&StringBuilder::BufferInitialize),
 m_Position(0),
-m_Size(len+1)
+m_Size(0),
+m_ToString(&StringBuilder::BufferToString)
+{}
+
+StringBuilder::StringBuilder(UINT len):
+m_AppendAnsi(&StringBuilder::StringAppendAnsi),
+m_AppendUnicode(&StringBuilder::StringAppendUnicode),
+m_Initialize(&StringBuilder::StringInitialize),
+m_Position(0),
+m_Size(len+1),
+m_ToString(&StringBuilder::StringToString)
 {
-m_String=String::Create(len, nullptr);
-m_Buffer=const_cast<LPTSTR>(m_String->Begin());
+if(len==0)
+	throw InvalidArgumentException();
 }
 
 
@@ -30,40 +42,151 @@ m_Buffer=const_cast<LPTSTR>(m_String->Begin());
 // Common
 //========
 
-UINT StringBuilder::Append(CHAR Char)
+UINT StringBuilder::Append(CHAR c)
 {
-return AppendChar(Char);
+(this->*m_Initialize)();
+return (this->*m_AppendAnsi)(c);
 }
 
-UINT StringBuilder::Append(WCHAR Char)
+UINT StringBuilder::Append(WCHAR c)
 {
-return AppendChar(Char);
+(this->*m_Initialize)();
+return (this->*m_AppendUnicode)(c);
 }
 
 UINT StringBuilder::Append(LPCSTR String)
 {
-return AppendString(UINT_MAX, String);
+(this->*m_Initialize)();
+UINT pos=0;
+for(; String[pos]; pos++)
+	(this->*m_AppendAnsi)(String[pos]);
+return pos;
 }
 
 UINT StringBuilder::Append(LPCWSTR String)
 {
-return AppendString(UINT_MAX, String);
+(this->*m_Initialize)();
+UINT pos=0;
+for(; String[pos]; pos++)
+	(this->*m_AppendUnicode)(String[pos]);
+return pos;
 }
 
 UINT StringBuilder::Append(UINT Length, LPCSTR String)
 {
-return AppendString(Length, String);
+(this->*m_Initialize)();
+UINT pos=0;
+for(; String[pos]; pos++)
+	{
+	if(pos==Length)
+		break;
+	(this->*m_AppendAnsi)(String[pos]);
+	}
+return pos;
 }
 
 UINT StringBuilder::Append(UINT Length, LPCWSTR String)
 {
-return AppendString(Length, String);
+(this->*m_Initialize)();
+UINT pos=0;
+for(; String[pos]; pos++)
+	{
+	if(pos==Length)
+		break;
+	(this->*m_AppendUnicode)(String[pos]);
+	}
+return pos;
 }
 
 Handle<String> StringBuilder::ToString()
 {
-m_Buffer[m_Position]=0;
-m_String->m_Hash=StringHelper::GetHash(m_Buffer);
-m_String->m_Length=m_Position;
-return m_String;
+return (this->*m_ToString)();
+}
+
+
+//================
+// Common Private
+//================
+
+UINT StringBuilder::BufferAppendAnsi(CHAR c)
+{
+TCHAR tc=CharHelper::ToChar<TCHAR>(c);
+if(m_Buffer->Write(&tc, sizeof(TCHAR))!=sizeof(TCHAR))
+	throw OutOfMemoryException();
+m_Position++;
+return 1;
+}
+
+UINT StringBuilder::BufferAppendUnicode(WCHAR c)
+{
+TCHAR tc=CharHelper::ToChar<TCHAR>(c);
+if(m_Buffer->Write(&tc, sizeof(TCHAR))!=sizeof(TCHAR))
+	throw OutOfMemoryException();
+m_Position++;
+return 1;
+}
+
+VOID StringBuilder::BufferInitialize()
+{
+if(!m_Buffer)
+	m_Buffer=Intermediate::Create(64);
+}
+
+Handle<String> StringBuilder::BufferToString()
+{
+if(!m_Buffer)
+	return nullptr;
+auto str=String::Create(m_Position, nullptr);
+auto buf=const_cast<LPTSTR>(str->Begin());
+m_Buffer->Read(buf, m_Position*sizeof(TCHAR));
+buf[m_Position]=0;
+str->m_Hash=StringHelper::GetHash(buf);
+str->m_Length=m_Position;
+m_Buffer->Clear();
+m_Position=0;
+return str;
+}
+
+UINT StringBuilder::StringAppendAnsi(CHAR c)
+{
+if(m_Position+1>=m_Size)
+	throw BufferOverrunException();
+auto buf=const_cast<LPTSTR>(m_String->Begin());
+buf[m_Position++]=CharHelper::ToChar<TCHAR>(c);
+return 1;
+}
+
+UINT StringBuilder::StringAppendUnicode(WCHAR c)
+{
+if(m_Position+1>=m_Size)
+	throw BufferOverrunException();
+auto buf=const_cast<LPTSTR>(m_String->Begin());
+buf[m_Position++]=CharHelper::ToChar<TCHAR>(c);
+return 1;
+}
+
+VOID StringBuilder::StringInitialize()
+{
+if(!m_String)
+	m_String=String::Create(m_Size-1, nullptr);
+}
+
+Handle<String> StringBuilder::StringToString()
+{
+if(!m_String)
+	return nullptr;
+if(m_Position+1<m_Size)
+	{
+	auto str=String::Create(m_Position, m_String->Begin());
+	m_Position=0;
+	return str;
+	}
+auto str=m_String;
+auto buf=const_cast<LPTSTR>(str->Begin());
+buf[m_Position]=0;
+str->m_Hash=StringHelper::GetHash(buf);
+str->m_Length=m_Position;
+m_String=nullptr;
+m_Position=0;
+return str;
 }
