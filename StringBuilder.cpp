@@ -52,12 +52,12 @@ return AppendString(UINT_MAX, String);
 
 UINT StringBuilder::Append(UINT Length, LPCSTR String)
 {
-return AppendString(UINT_MAX, String);
+return AppendString(Length, String);
 }
 
 UINT StringBuilder::Append(UINT Length, LPCWSTR String)
 {
-return AppendString(UINT_MAX, String);
+return AppendString(Length, String);
 }
 
 Handle<String> StringBuilder::ToString()
