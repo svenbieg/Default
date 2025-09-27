@@ -11,7 +11,7 @@
 
 #include "Concurrency/Task.h"
 #include "Storage/Streams/RandomAccessStream.h"
-#include "Storage/pbuf.hpp"
+#include "Storage/packet_buf.h"
 
 
 //===========
@@ -30,7 +30,7 @@ class Intermediate: public Streams::RandomAccessStream
 public:
 	// Con-/Destructors
 	inline ~Intermediate() { Clear(); }
-	static inline Handle<Intermediate> Create() { return new Intermediate(); }
+	static inline Handle<Intermediate> Create(UINT BlockSize=PAGE_SIZE) { return new Intermediate(BlockSize); }
 
 	// Common
 	VOID Clear();
@@ -45,10 +45,10 @@ public:
 
 private:
 	// Con-/Destructors
-	Intermediate() {}
+	Intermediate(UINT BlockSize);
 
 	// Common
-	pbuf<PAGE_SIZE> m_Buffer;
+	packet_buf m_Buffer;
 	Concurrency::Mutex m_Mutex;
 	Concurrency::Signal m_Signal;
 };

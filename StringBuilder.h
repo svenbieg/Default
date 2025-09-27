@@ -9,7 +9,7 @@
 // Using
 //=======
 
-#include "Storage/pbuf.hpp"
+#include "Storage/packet_buf.h"
 
 
 //================
@@ -49,7 +49,7 @@ private:
 	Handle<String> StringToString();
 	APPEND_ANSI m_AppendAnsi;
 	APPEND_UNICODE m_AppendUnicode;
-	Storage::pbuf<64> m_Buffer;
+	Storage::packet_buf m_Buffer;
 	INITIALIZE m_Initialize;
 	UINT m_Position;
 	UINT m_Size;

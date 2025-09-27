@@ -80,4 +80,13 @@ WriteLock lock(m_Mutex);
 return m_Buffer.write(buf, size);
 }
 
+
+//==========================
+// Con-/Destructors Private
+//==========================
+
+Intermediate::Intermediate(UINT block_size):
+m_Buffer(block_size)
+{}
+
 }

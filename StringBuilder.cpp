@@ -19,6 +19,7 @@
 StringBuilder::StringBuilder():
 m_AppendAnsi(&StringBuilder::BufferAppendAnsi),
 m_AppendUnicode(&StringBuilder::BufferAppendUnicode),
+m_Buffer(64*sizeof(TCHAR)),
 m_Initialize(&StringBuilder::BufferInitialize),
 m_Position(0),
 m_Size(0),
@@ -28,6 +29,7 @@ m_ToString(&StringBuilder::BufferToString)
 StringBuilder::StringBuilder(UINT len):
 m_AppendAnsi(&StringBuilder::StringAppendAnsi),
 m_AppendUnicode(&StringBuilder::StringAppendUnicode),
+m_Buffer(64*sizeof(TCHAR)),
 m_Initialize(&StringBuilder::StringInitialize),
 m_Position(0),
 m_Size(len+1),
