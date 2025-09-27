@@ -74,27 +74,9 @@ return str;
 // Access
 //========
 
-Handle<String> String::ToLowercase()
-{
-auto str=String::Create(m_Length, m_Buffer);
-auto buf=const_cast<LPTSTR>(str->Begin());
-StringHelper::Lowercase(buf);
-str->m_Hash=StringHelper::GetHash(buf);
-return str;
-}
-
 Handle<String> String::ToString(LanguageCode lng)
 {
 return this;
-}
-
-Handle<String> String::ToUppercase()
-{
-auto str=String::Create(m_Length, m_Buffer);
-auto buf=const_cast<LPTSTR>(str->Begin());
-StringHelper::Uppercase(buf);
-str->m_Hash=StringHelper::GetHash(buf);
-return str;
 }
 
 
