@@ -1,6 +1,6 @@
-//==================
-// StringBuffer.cpp
-//==================
+//================
+// StringView.cpp
+//================
 
 #include "pch.h"
 
@@ -9,16 +9,9 @@
 // Using
 //=======
 
-#include "Storage/StringBuffer.h"
+#include "StringView.h"
 
 using namespace Storage::Streams;
-
-
-//===========
-// Namespace
-//===========
-
-namespace Storage {
 
 
 //==========
@@ -26,9 +19,9 @@ namespace Storage {
 //==========
 
 #ifdef _UNICODE
-constexpr StreamFormat StringStreamFormat=StreamFormat::Unicode;
+constexpr StreamFormat StringViewFormat=StreamFormat::Unicode;
 #else
-constexpr StreamFormat StringStreamFormat=StreamFormat::Ansi;
+constexpr StreamFormat StringViewFormat=StreamFormat::Ansi;
 #endif
 
 
@@ -36,7 +29,7 @@ constexpr StreamFormat StringStreamFormat=StreamFormat::Ansi;
 // Input-Stream
 //==============
 
-SIZE_T StringBuffer::Read(VOID* buf, SIZE_T size)
+SIZE_T StringView::Read(VOID* buf, SIZE_T size)
 {
 SIZE_T copy=TypeHelper::Min(size, m_Size-m_Position);
 if(!copy)
@@ -52,8 +45,8 @@ return copy;
 // Con-/Destructors Private
 //==========================
 
-StringBuffer::StringBuffer(Handle<String> value):
-Stream(StringStreamFormat),
+StringView::StringView(Handle<String> value):
+Stream(StringViewFormat),
 m_Position(0),
 m_Size(0),
 m_Value(value)
@@ -63,6 +56,4 @@ if(m_Value)
 	UINT len=m_Value->GetLength();
 	m_Size=(len+1)*sizeof(TCHAR);
 	}
-}
-
 }

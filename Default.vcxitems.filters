@@ -106,9 +106,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\StaticBuffer.h">
       <Filter>Storage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\StringBuffer.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Array.h">
       <Filter>Collections</Filter>
     </ClInclude>
@@ -122,6 +119,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\packet_buf.h">
       <Filter>Storage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)StringView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
@@ -158,13 +156,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\StaticBuffer.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\StringBuffer.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringBuilder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\packet_buf.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)StringView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Storage">
