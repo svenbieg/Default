@@ -37,7 +37,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\StringList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Culture\LanguageCode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DynamicHandle.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)DynamicPointer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventHandler.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Exception.h" />

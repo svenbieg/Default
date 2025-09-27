@@ -41,7 +41,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\Stream.h">
       <Filter>Storage\Streams</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)DynamicPointer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Intermediate.h">
       <Filter>Storage</Filter>
     </ClInclude>
