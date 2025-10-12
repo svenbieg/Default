@@ -14,17 +14,6 @@
 using namespace Storage::Streams;
 
 
-//==========
-// Settings
-//==========
-
-#ifdef _UNICODE
-constexpr StreamFormat StringViewFormat=StreamFormat::Unicode;
-#else
-constexpr StreamFormat StringViewFormat=StreamFormat::Ansi;
-#endif
-
-
 //==============
 // Input-Stream
 //==============
@@ -46,7 +35,6 @@ return copy;
 //==========================
 
 StringView::StringView(Handle<String> value):
-Stream(StringViewFormat),
 m_Position(0),
 m_Size(0),
 m_Value(value)

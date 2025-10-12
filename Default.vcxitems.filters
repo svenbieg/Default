@@ -41,7 +41,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\Stream.h">
       <Filter>Storage\Streams</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Intermediate.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\PacketBuffer.h">
       <Filter>Storage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Collections\Index.h">
@@ -120,6 +120,9 @@
       <Filter>Storage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)StringView.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UI\Console.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
@@ -130,7 +133,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Buffer.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\Intermediate.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Storage\PacketBuffer.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Collections\StringList.cpp">
@@ -161,6 +164,9 @@
       <Filter>Storage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringView.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UI\Console.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Storage">
@@ -177,6 +183,9 @@
     </Filter>
     <Filter Include="Culture">
       <UniqueIdentifier>{9163acb5-c885-4791-b4c8-e49817220d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{2aed8e2d-e850-466c-970b-0eedc150fbd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

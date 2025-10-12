@@ -1,5 +1,5 @@
 //================
-// Intermediate.h
+// PacketBuffer.h
 //================
 
 #pragma once
@@ -21,16 +21,16 @@
 namespace Storage {
 
 
-//==============
-// Intermediate
-//==============
+//===============
+// Packet-Buffer
+//===============
 
-class Intermediate: public Streams::RandomAccessStream
+class PacketBuffer: public Streams::RandomAccessStream
 {
 public:
 	// Con-/Destructors
-	inline ~Intermediate() { Clear(); }
-	static inline Handle<Intermediate> Create(UINT BlockSize=PAGE_SIZE) { return new Intermediate(BlockSize); }
+	inline ~PacketBuffer() { Clear(); }
+	static inline Handle<PacketBuffer> Create(UINT BlockSize=PAGE_SIZE) { return new PacketBuffer(BlockSize); }
 
 	// Common
 	VOID Clear();
@@ -45,7 +45,7 @@ public:
 
 private:
 	// Con-/Destructors
-	Intermediate(UINT BlockSize);
+	PacketBuffer(UINT BlockSize);
 
 	// Common
 	packet_buf m_Buffer;
