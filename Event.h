@@ -12,6 +12,16 @@
 #include "EventHandler.h"
 
 
+//==============
+// Notification
+//==============
+
+enum class EventNotification
+{
+None
+};
+
+
 //============
 // Event-Base
 //============
