@@ -51,6 +51,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Buffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Directory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Encoding\Dwarf.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Encoding\Unsigned.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\File.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\StaticBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Streams\InputStream.h" />

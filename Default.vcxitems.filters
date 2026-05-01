@@ -110,6 +110,9 @@
       <Filter>Storage\Streams</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Callable.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Storage\Encoding\Unsigned.h">
+      <Filter>Storage\Encoding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)StringHelper.cpp" />
